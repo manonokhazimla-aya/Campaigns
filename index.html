@@ -7,7 +7,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* Your existing styles remain the same */
         * {
             margin: 0;
             padding: 0;
@@ -22,167 +21,43 @@
             --danger-color: #e74c3c;
             --light-bg: #ecf0f1;
             --dark-bg: #34495e;
-            --admin-color: #e74c3c;
-            --user-color: #27ae60;
-        }
-
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f5f7fa;
-        }
-
-        .sidebar {
-            background: linear-gradient(135deg, var(--primary-color), var(--dark-bg));
-            height: 100vh;
-            color: white;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 280px;
-            transition: all 0.3s ease;
-            overflow-y: auto;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-            z-index: 1000;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .sidebar.closed {
-            transform: translateX(-280px);
-        }
-
-        .sidebar .user-badge {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px 15px;
-            margin: 20px;
-            border-radius: 15px;
-            text-align: center;
-        }
-
-        .sidebar .user-badge .role-badge {
-            display: inline-block;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            margin: 10px 0;
-        }
-
-        .sidebar .user-badge .role-badge.admin {
-            background: var(--admin-color);
-            color: white;
-        }
-
-        .sidebar .user-badge .role-badge.user {
-            background: var(--user-color);
-            color: white;
-        }
-
-        .sidebar .nav-link {
-            color: rgba(255, 255, 255, 0.8);
-            padding: 15px 20px;
-            font-size: 16px;
-            transition: all 0.3s;
-            cursor: pointer;
-            border-left: 3px solid transparent;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .sidebar .nav-link:hover,
-        .sidebar .nav-link.active {
-            background: rgba(52, 152, 219, 0.2);
-            color: white;
-            border-left-color: var(--secondary-color);
-        }
-
-        .sidebar .nav-link i {
-            width: 24px;
-            text-align: center;
-            font-size: 18px;
-        }
-
-        .main-content {
-            margin-left: 280px;
-            padding: 20px;
             min-height: 100vh;
-            transition: margin-left 0.3s ease;
         }
 
-        .main-content.expanded {
-            margin-left: 0;
-        }
-
-        .dashboard-header {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            position: relative;
-        }
-
-        .menu-toggle {
-            display: none;
-            position: fixed;
-            top: 15px;
-            left: 15px;
-            z-index: 1001;
-            background: var(--primary-color);
+        /* Admin Badge */
+        .admin-badge {
+            background: #e74c3c;
             color: white;
-            border: none;
-            border-radius: 10px;
-            padding: 12px 18px;
-            cursor: pointer;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            font-size: 20px;
-        }
-
-        .mobile-logout {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1001;
-            background: var(--danger-color);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            padding: 15px 25px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
-            font-weight: 600;
-            align-items: center;
-            gap: 10px;
-            font-size: 16px;
-        }
-
-        .role-indicator {
-            display: inline-block;
-            padding: 5px 15px;
+            padding: 4px 12px;
             border-radius: 20px;
             font-size: 12px;
             font-weight: bold;
             margin-left: 10px;
         }
 
-        .role-indicator.admin { background: var(--admin-color); color: white; }
-        .role-indicator.user { background: var(--user-color); color: white; }
+        /* Header */
+        .dashboard-header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 30px 20px;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
 
+        /* Stats Cards */
         .stat-card {
             background: white;
             border-radius: 15px;
             padding: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
             transition: transform 0.3s;
-            height: 100%;
             display: flex;
             align-items: center;
         }
@@ -200,7 +75,6 @@
             justify-content: center;
             font-size: 24px;
             margin-right: 15px;
-            flex-shrink: 0;
         }
 
         .stat-icon.blue { background: linear-gradient(135deg, #3498db, #2980b9); color: white; }
@@ -208,53 +82,71 @@
         .stat-icon.orange { background: linear-gradient(135deg, #f39c12, #e67e22); color: white; }
         .stat-icon.purple { background: linear-gradient(135deg, #9b59b6, #8e44ad); color: white; }
 
+        /* Filter Section */
+        .filter-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .filter-section select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        /* Tables */
         .table-container {
             background: white;
             border-radius: 15px;
             padding: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            margin: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
             overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
         }
 
         .table {
             margin-bottom: 0;
-            min-width: 600px;
         }
 
         .table thead th {
-            background: var(--primary-color);
+            background: #2c3e50;
             color: white;
             border: none;
             padding: 12px;
-            font-weight: 500;
             white-space: nowrap;
         }
 
         .table tbody tr:hover {
-            background: var(--light-bg);
+            background: #f5f5f5;
         }
 
+        /* Badges */
         .badge-performance {
-            padding: 5px 10px;
+            padding: 5px 12px;
             border-radius: 20px;
             font-weight: 500;
             font-size: 12px;
             white-space: nowrap;
         }
 
-        .badge-high { background: linear-gradient(135deg, #27ae60, #229954); color: white; }
-        .badge-medium { background: linear-gradient(135deg, #f39c12, #e67e22); color: white; }
-        .badge-low { background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; }
+        .badge-high { background: #27ae60; color: white; }
+        .badge-medium { background: #f39c12; color: white; }
+        .badge-low { background: #e74c3c; color: white; }
 
+        /* Campaign Badges */
         .campaign-badge {
             display: inline-block;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 12px;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 14px;
             font-weight: 500;
-            margin: 3px;
-            background: var(--secondary-color);
+            margin: 5px;
+            background: #3498db;
             color: white;
             cursor: pointer;
             transition: all 0.3s;
@@ -262,56 +154,73 @@
 
         .campaign-badge:hover {
             transform: scale(1.05);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(52,152,219,0.3);
         }
 
-        .ranking-card {
-            background: white;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 10px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            border-left: 4px solid transparent;
-        }
-
-        .ranking-card.high { border-left-color: var(--success-color); }
-        .ranking-card.low { border-left-color: var(--danger-color); }
-
-        .ranking-position {
-            font-size: 18px;
-            font-weight: bold;
-            color: var(--primary-color);
-            min-width: 40px;
-        }
-
+        /* Upload Area */
         .upload-area {
-            border: 3px dashed var(--secondary-color);
+            border: 3px dashed #3498db;
             border-radius: 15px;
-            padding: 40px 20px;
+            padding: 40px;
             text-align: center;
             background: #f8f9fa;
             cursor: pointer;
             transition: all 0.3s;
+            margin: 20px;
         }
 
         .upload-area:hover {
             background: #e9ecef;
-            border-color: var(--primary-color);
+            border-color: #2c3e50;
         }
 
         .upload-area i {
-            font-size: 48px;
-            color: var(--secondary-color);
-            margin-bottom: 15px;
+            font-size: 64px;
+            color: #3498db;
+            margin-bottom: 20px;
         }
 
+        /* Admin Panel */
+        .admin-panel {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-left: 5px solid #e74c3c;
+        }
+
+        .admin-login {
+            max-width: 400px;
+            margin: 50px auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .btn-login {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            width: 100%;
+            font-weight: bold;
+        }
+
+        .btn-login:hover {
+            background: #c0392b;
+        }
+
+        /* Loading */
         .loading-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255,255,255,0.95);
             display: none;
             justify-content: center;
             align-items: center;
@@ -319,18 +228,13 @@
             flex-direction: column;
         }
 
-        .loading-overlay.active {
-            display: flex;
-        }
-
         .spinner {
             width: 50px;
             height: 50px;
-            border: 4px solid var(--light-bg);
-            border-top: 4px solid var(--secondary-color);
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin-bottom: 15px;
         }
 
         @keyframes spin {
@@ -338,235 +242,55 @@
             100% { transform: rotate(360deg); }
         }
 
-        .login-container {
-            max-width: 500px;
-            width: 90%;
-            margin: 50px auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-            padding: 30px 20px;
-        }
-
-        .role-selector {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-        }
-
-        .role-btn {
-            flex: 1;
-            min-width: 120px;
-            padding: 15px;
-            border: 2px solid #dee2e6;
-            border-radius: 12px;
-            background: white;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-align: center;
-        }
-
-        .role-btn.selected {
-            border-color: var(--secondary-color);
-            background: #e8f4fd;
-        }
-
-        .role-btn.admin.selected { border-color: var(--admin-color); background: #fde8e8; }
-        .role-btn.user.selected { border-color: var(--user-color); background: #e8f8e8; }
-
-        .toast-container {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 9999;
-            max-width: 350px;
-            width: calc(100% - 40px);
-        }
-
-        .toast {
-            background: white;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            animation: slideIn 0.3s ease;
-        }
-
-        .toast.success { background: var(--success-color); color: white; }
-        .toast.danger { background: var(--danger-color); color: white; }
-        .toast.warning { background: var(--warning-color); color: white; }
-        .toast.info { background: var(--secondary-color); color: white; }
-
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        .filter-section {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-        }
-
-        .filter-section select {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #dee2e6;
-            border-radius: 10px;
-            font-size: 16px;
-            background: white;
-        }
-
-        .summary-stats {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-        }
-
-        .summary-stats .stat-value {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .summary-stats .stat-label {
-            font-size: 13px;
-            opacity: 0.9;
-        }
-
-        .section { display: none; }
-        .section.active { display: block; }
-        .admin-only { display: none; }
-        .user-only { display: none; }
-        body.admin .admin-only { display: block; }
-        body.user .user-only { display: block; }
-        body.user .admin-only { display: none; }
-
-        /* GitHub Data Sharing Section */
-        .github-share {
-            background: #f6f8fa;
-            border: 1px solid #e1e4e8;
-            border-radius: 10px;
-            padding: 20px;
-            margin-top: 20px;
-        }
-
-        .github-share h6 {
-            color: #24292e;
-            margin-bottom: 15px;
-        }
-
-        .share-link-box {
-            background: white;
-            border: 1px solid #e1e4e8;
-            border-radius: 6px;
-            padding: 10px;
-            margin: 10px 0;
-            word-break: break-all;
-            font-size: 12px;
-        }
-
-        .btn-github {
-            background: #24292e;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn-github:hover {
-            background: #000;
-        }
-
+        /* Mobile Responsive */
         @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-            }
-
-            .mobile-logout {
-                display: flex;
-            }
-
-            .sidebar {
-                transform: translateX(-280px);
-            }
-
-            .sidebar.active {
-                transform: translateX(0);
-            }
-
-            .main-content {
-                margin-left: 0;
-                padding: 15px;
-                padding-top: 70px;
-            }
-
             .dashboard-header {
-                padding: 15px;
+                padding: 20px;
             }
-
-            .dashboard-header h3 {
-                font-size: 20px;
-                margin-bottom: 10px;
-            }
-
-            .dashboard-header .col-md-6.text-end {
-                text-align: left !important;
-                margin-top: 10px;
-            }
-
-            .dashboard-header .btn {
-                margin-bottom: 5px;
-                width: 100%;
-            }
-
+            
             .stat-card {
                 padding: 15px;
             }
-
+            
             .stat-icon {
                 width: 50px;
                 height: 50px;
                 font-size: 20px;
             }
-
-            .stat-card h3 {
-                font-size: 18px;
+            
+            .filter-section, .table-container, .admin-panel {
+                margin: 10px;
+                padding: 15px;
             }
-
-            .stat-card h6 {
-                font-size: 13px;
+            
+            .campaign-badge {
+                padding: 6px 12px;
+                font-size: 12px;
             }
+        }
 
-            .summary-stats .stat-value {
-                font-size: 20px;
-            }
+        /* Tabs */
+        .nav-tabs {
+            margin: 20px;
+        }
+        
+        .nav-tabs .nav-link {
+            color: #2c3e50;
+            font-weight: 500;
+        }
+        
+        .nav-tabs .nav-link.active {
+            color: #3498db;
+            font-weight: bold;
+        }
 
-            .filter-section .row > div {
-                margin-bottom: 10px;
-            }
-
-            .role-selector {
-                flex-direction: column;
-            }
-
-            .role-btn {
-                width: 100%;
-            }
-
-            .login-container {
-                margin: 20px auto;
-                padding: 20px 15px;
-            }
+        /* Share Info */
+        .share-info {
+            background: #e8f4fd;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px;
+            font-size: 14px;
         }
     </style>
 </head>
@@ -574,677 +298,323 @@
     <!-- Loading Overlay -->
     <div class="loading-overlay" id="loadingOverlay">
         <div class="spinner"></div>
-        <h5 id="loadingMessage">Loading...</h5>
+        <h5 class="mt-3" id="loadingMessage">Loading...</h5>
     </div>
 
-    <!-- Toast Container -->
-    <div class="toast-container" id="toastContainer"></div>
-
-    <!-- Menu Toggle -->
-    <button class="menu-toggle" onclick="toggleSidebar()">
-        <i class="fas fa-bars"></i>
-    </button>
-
-    <!-- Mobile Logout -->
-    <button class="mobile-logout" onclick="confirmLogout()">
-        <i class="fas fa-sign-out-alt"></i> Logout
-    </button>
-
-    <!-- Login Section -->
-    <div id="loginSection" class="section active">
-        <div class="login-container">
-            <div class="text-center mb-4">
-                <i class="fas fa-chart-line fa-4x" style="color: #667eea;"></i>
-                <h3 class="mt-3">MTD Closing Ratio</h3>
-                <p class="text-muted">February 2025</p>
-            </div>
-            
-            <div class="role-selector">
-                <div class="role-btn admin" onclick="selectRole('admin')" id="adminRoleBtn">
-                    <i class="fas fa-user-cog"></i>
-                    <h6>Admin</h6>
-                    <small>Full access</small>
+    <!-- Main Content -->
+    <div id="mainContent">
+        <!-- Header - Always Visible -->
+        <div class="dashboard-header">
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                <div>
+                    <h2 class="mb-2">
+                        <i class="fas fa-chart-line me-2"></i>
+                        MTD Closing Ratio Dashboard
+                        <span id="roleIndicator" class="admin-badge" style="display: none;">Admin</span>
+                    </h2>
+                    <p class="mb-0">
+                        <i class="fas fa-calendar me-2"></i>February 2025
+                        <span class="mx-3">|</span>
+                        <i class="fas fa-users me-2"></i>
+                        <span id="dataStatus">No data loaded</span>
+                    </p>
                 </div>
-                <div class="role-btn user" onclick="selectRole('user')" id="userRoleBtn">
-                    <i class="fas fa-user"></i>
-                    <h6>Viewer</h6>
-                    <small>View only</small>
+                <div class="mt-2 mt-sm-0">
+                    <button class="btn btn-light me-2" onclick="toggleAdminPanel()" id="adminToggleBtn">
+                        <i class="fas fa-crown me-2"></i>Admin
+                    </button>
+                    <button class="btn btn-light" onclick="exportData()">
+                        <i class="fas fa-download me-2"></i>Export
+                    </button>
                 </div>
             </div>
-            
-            <form onsubmit="handleLogin(event)">
-                <div class="mb-3">
-                    <label class="form-label">Username</label>
-                    <input type="text" id="username" class="form-control" value="admin" required>
-                </div>
-                <div class="mb-4">
-                    <label class="form-label">Password</label>
-                    <input type="password" id="password" class="form-control" value="admin123" required>
-                </div>
-                <button type="submit" class="btn btn-primary w-100 py-3">Sign In</button>
-            </form>
+        </div>
 
-            <!-- GitHub Data Sharing Section -->
-            <div class="github-share mt-4">
-                <h6><i class="fab fa-github me-2"></i>GitHub Data Sharing</h6>
+        <!-- Admin Login Panel (Hidden by default) -->
+        <div id="adminLoginPanel" style="display: none;">
+            <div class="admin-login">
+                <h4 class="text-center mb-4">
+                    <i class="fas fa-lock me-2"></i>
+                    Admin Login
+                </h4>
+                <form onsubmit="handleAdminLogin(event)">
+                    <div class="mb-3">
+                        <label>Username</label>
+                        <input type="text" id="adminUsername" class="form-control" value="admin" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Password</label>
+                        <input type="password" id="adminPassword" class="form-control" value="admin123" required>
+                    </div>
+                    <button type="submit" class="btn-login">Login</button>
+                    <button type="button" class="btn btn-link w-100 mt-2" onclick="hideAdminPanel()">Cancel</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Admin Upload Panel (Visible after login) -->
+        <div id="adminUploadPanel" style="display: none;">
+            <div class="admin-panel">
+                <h5 class="mb-3">
+                    <i class="fas fa-upload me-2 text-danger"></i>
+                    Upload New Data
+                </h5>
                 
-                <!-- Admin Controls -->
-                <div class="admin-only">
-                    <button class="btn btn-github w-100 mb-2" onclick="generateShareableData()">
-                        <i class="fas fa-qrcode me-2"></i>Generate Shareable Link
-                    </button>
-                    <button class="btn btn-outline-secondary w-100 mb-3" onclick="copyShareableLink()">
-                        <i class="fas fa-copy me-2"></i>Copy Share Link
-                    </button>
-                    
-                    <div id="shareLinkContainer" style="display: none;" class="share-link-box mb-3">
-                        <strong>Share this link:</strong>
-                        <p id="shareLinkText" class="mt-2 mb-0"></p>
+                <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <h4>Click to upload Excel file</h4>
+                    <p class="text-muted">Upload MTD Closing February 2025 file</p>
+                </div>
+                <input type="file" id="fileInput" accept=".xlsx" style="display:none;" onchange="handleFileUpload(this)">
+
+                <!-- Upload Progress -->
+                <div id="uploadProgress" style="display: none;" class="mt-3">
+                    <div class="progress">
+                        <div class="progress-bar" id="progressBar" style="width: 0%"></div>
                     </div>
+                    <p class="text-center mt-2" id="progressText">Processing...</p>
                 </div>
 
-                <!-- Everyone can load data -->
-                <div class="mt-3">
-                    <label class="form-label fw-bold">Load Shared Data</label>
-                    <div class="input-group">
-                        <input type="text" id="dataKeyInput" class="form-control" placeholder="Enter data key or paste link">
-                        <button class="btn btn-primary" onclick="loadSharedData()">
-                            <i class="fas fa-cloud-download-alt"></i> Load
-                        </button>
-                    </div>
-                    <small class="text-muted d-block mt-2">
-                        <i class="fas fa-info-circle"></i> 
-                        Enter the data key shared by admin (e.g., "feb2025-data")
-                    </small>
-                </div>
-
-                <hr class="my-3">
-
-                <div class="text-center text-muted small">
-                    <i class="fab fa-github me-1"></i>
-                    Data is stored in GitHub Gist - accessible to everyone with the key
+                <!-- Share Info - Always visible to everyone -->
+                <div class="share-info">
+                    <i class="fas fa-info-circle me-2 text-info"></i>
+                    <strong>Data is live!</strong> Everyone viewing this website now sees this data.
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Main App -->
-    <div id="mainApp" style="display: none;">
-        <!-- Sidebar -->
-        <div class="sidebar" id="sidebar">
-            <div class="user-badge">
-                <i class="fas fa-user-circle fa-3x"></i>
-                <h6 id="sidebarUsername" class="mt-2">User</h6>
-                <span id="sidebarRole" class="role-badge admin">Administrator</span>
-                <button class="btn btn-outline-light w-100 mt-3" onclick="confirmLogout()">
-                    <i class="fas fa-sign-out-alt me-2"></i>Logout
-                </button>
-            </div>
-            <nav class="nav flex-column">
-                <a class="nav-link active" onclick="showSection('dashboard')">
-                    <i class="fas fa-tachometer-alt"></i> Dashboard
-                </a>
-                <a class="nav-link admin-only" onclick="showSection('upload')">
-                    <i class="fas fa-upload"></i> Upload Data
-                </a>
-                <a class="nav-link" onclick="showSection('campaigns')">
-                    <i class="fas fa-bullhorn"></i> Campaigns
-                </a>
-                <a class="nav-link" onclick="showSection('agents')">
-                    <i class="fas fa-users"></i> Agents
-                </a>
-                <a class="nav-link" onclick="showSection('leaders')">
-                    <i class="fas fa-user-tie"></i> Team Leaders
-                </a>
-                <a class="nav-link" onclick="showSection('rankings')">
-                    <i class="fas fa-trophy"></i> Rankings
-                </a>
-                <a class="nav-link admin-only" onclick="showSection('history')">
-                    <i class="fas fa-history"></i> History
-                </a>
-            </nav>
-        </div>
-
-        <!-- Main Content -->
-        <div class="main-content" id="mainContent">
-            <div class="dashboard-header">
-                <div class="d-flex justify-content-between align-items-center flex-wrap">
-                    <div>
-                        <h3 id="pageTitle" class="mb-1">Dashboard</h3>
-                        <p class="text-muted mb-0">
-                            <i class="fas fa-calendar me-2"></i>February 2025
-                            <span class="mx-2">|</span>
-                            <i class="fas fa-user me-2"></i><span id="usernameDisplay">User</span>
-                            <span id="roleDisplay" class="role-indicator admin">Admin</span>
-                        </p>
-                    </div>
-                    <div class="mt-2 mt-sm-0">
-                        <button class="btn btn-primary me-2" onclick="refreshData()">
-                            <i class="fas fa-sync-alt me-1"></i>Refresh
-                        </button>
-                        <button class="btn btn-success me-2" onclick="exportData()">
-                            <i class="fas fa-download me-1"></i>Export
-                        </button>
-                        <button class="btn btn-danger admin-only" onclick="clearAllData()">
-                            <i class="fas fa-trash me-1"></i>Clear
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Dashboard Section -->
-            <div id="dashboardSection" class="section active">
-                <div class="filter-section">
-                    <h5 class="mb-3"><i class="fas fa-filter me-2"></i>Filters</h5>
-                    <div class="row g-3">
-                        <div class="col-md-4">
-                            <select class="form-select" id="campaignFilter" onchange="applyFilters()">
-                                <option value="all">All Campaigns</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <select class="form-select" id="teamLeaderFilter" onchange="applyFilters()">
-                                <option value="all">All Team Leaders</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <select class="form-select" id="agentFilter" onchange="applyFilters()">
-                                <option value="all">All Agents</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="summary-stats">
-                    <div class="row g-3">
-                        <div class="col-6 col-md-3">
-                            <div class="stat-label">Campaigns</div>
-                            <div class="stat-value" id="totalCampaigns">0</div>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <div class="stat-label">Agents</div>
-                            <div class="stat-value" id="totalAgents">0</div>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <div class="stat-label">Total Calls</div>
-                            <div class="stat-value" id="totalCalls">0</div>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <div class="stat-label">Total Sales</div>
-                            <div class="stat-value" id="totalSales">0</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row g-3 mb-4" id="statCards"></div>
-
-                <div class="row mb-4">
-                    <div class="col-12">
-                        <div class="table-container">
-                            <h5 class="mb-3">Campaign Overview</h5>
-                            <div class="d-flex flex-wrap" id="campaignQuickStats"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row g-3 mb-4">
-                    <div class="col-md-6">
-                        <div class="table-container">
-                            <h5 class="mb-3"><i class="fas fa-arrow-up text-success me-2"></i>Top 10 Performers</h5>
-                            <div id="topPerformers"></div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="table-container">
-                            <h5 class="mb-3"><i class="fas fa-arrow-down text-danger me-2"></i>Bottom 10 Performers</h5>
-                            <div id="bottomPerformers"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <ul class="nav nav-tabs mb-3">
-                    <li class="nav-item"><button class="nav-link active" onclick="showTab('campaigns')">By Campaign</button></li>
-                    <li class="nav-item"><button class="nav-link" onclick="showTab('teamleaders')">By Team Leader</button></li>
-                    <li class="nav-item"><button class="nav-link" onclick="showTab('agents')">By Agent</button></li>
-                </ul>
-
-                <div class="tab-content">
-                    <div class="tab-pane active" id="campaignsTab">
-                        <div class="table-container">
-                            <table class="table">
-                                <thead><tr><th>Campaign</th><th>Agents</th><th>Calls</th><th>Sales</th><th>Ratio</th></tr></thead>
-                                <tbody id="campaignsTable"></tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="teamleadersTab">
-                        <div class="table-container">
-                            <table class="table">
-                                <thead><tr><th>Team Leader</th><th>Agents</th><th>Campaigns</th><th>Calls</th><th>Sales</th><th>Ratio</th></tr></thead>
-                                <tbody id="teamLeadersTable"></tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="agentsTab">
-                        <div class="table-container">
-                            <table class="table">
-                                <thead><tr><th>Agent</th><th>ID</th><th>Leader</th><th>Campaigns</th><th>Calls</th><th>Sales</th><th>Ratio</th></tr></thead>
-                                <tbody id="agentsTable"></tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Upload Section -->
-            <div id="uploadSection" class="section admin-only">
-                <div class="table-container">
-                    <h5 class="mb-3">Upload Excel File</h5>
-                    <div class="upload-area" onclick="document.getElementById('fileInput').click()">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                        <h5>Click to upload</h5>
-                        <p class="text-muted">Supported: .xlsx</p>
-                    </div>
-                    <input type="file" id="fileInput" accept=".xlsx" style="display:none;" onchange="handleFileUpload(this)">
-                    <div id="uploadProgress" style="display:none;" class="mt-3">
-                        <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
-                        <p class="text-center mt-2" id="progressText">Uploading...</p>
-                    </div>
-                    <div id="validationResults" class="mt-3" style="display:none;"></div>
-                </div>
-            </div>
-
-            <!-- Campaigns Section -->
-            <div id="campaignsSection" class="section">
-                <div class="table-container">
-                    <h5 class="mb-3">All Campaigns</h5>
-                    <table class="table">
-                        <thead><tr><th>Campaign</th><th>Agents</th><th>Calls</th><th>Sales</th><th>Ratio</th><th>Top Agent</th></tr></thead>
-                        <tbody id="allCampaignsTable"></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Agents Section -->
-            <div id="agentsSection" class="section">
-                <div class="table-container">
-                    <h5 class="mb-3">All Agents</h5>
-                    <table class="table">
-                        <thead><tr><th>Agent</th><th>ID</th><th>Leader</th><th>Campaigns</th><th>Calls</th><th>Sales</th><th>Ratio</th><th>Rank</th></tr></thead>
-                        <tbody id="agentsFullTable"></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Team Leaders Section -->
-            <div id="leadersSection" class="section">
-                <div class="table-container">
-                    <h5 class="mb-3">Team Leaders</h5>
-                    <table class="table">
-                        <thead><tr><th>Team Leader</th><th>Agents</th><th>Campaigns</th><th>Calls</th><th>Sales</th><th>Ratio</th></tr></thead>
-                        <tbody id="allTeamLeadersTable"></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Rankings Section -->
-            <div id="rankingsSection" class="section">
+        <!-- Data Display - Always Visible to Everyone -->
+        <div id="dataDisplay">
+            <!-- Filters -->
+            <div class="filter-section">
+                <h5 class="mb-3">
+                    <i class="fas fa-filter me-2"></i>
+                    Filters
+                </h5>
                 <div class="row g-3">
-                    <div class="col-md-6">
-                        <div class="table-container">
-                            <h5 class="mb-3"><i class="fas fa-trophy text-warning me-2"></i>Highest Ratios</h5>
-                            <div id="highestRankings"></div>
-                        </div>
+                    <div class="col-md-4">
+                        <select class="form-select" id="campaignFilter" onchange="applyFilters()">
+                            <option value="all">All Campaigns</option>
+                        </select>
                     </div>
-                    <div class="col-md-6">
-                        <div class="table-container">
-                            <h5 class="mb-3"><i class="fas fa-chart-line text-danger me-2"></i>Lowest Ratios</h5>
-                            <div id="lowestRankings"></div>
-                        </div>
+                    <div class="col-md-4">
+                        <select class="form-select" id="teamLeaderFilter" onchange="applyFilters()">
+                            <option value="all">All Team Leaders</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <select class="form-select" id="agentFilter" onchange="applyFilters()">
+                            <option value="all">All Agents</option>
+                        </select>
                     </div>
                 </div>
             </div>
 
-            <!-- History Section -->
-            <div id="historySection" class="section admin-only">
+            <!-- Campaign Quick Stats -->
+            <div class="table-container">
+                <h5 class="mb-3">Campaign Overview</h5>
+                <div class="d-flex flex-wrap" id="campaignQuickStats"></div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="row g-3 mx-2" id="statCards"></div>
+
+            <!-- Tabs -->
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <button class="nav-link active" onclick="showTab('campaigns')">By Campaign</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" onclick="showTab('teamleaders')">By Team Leader</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" onclick="showTab('agents')">By Agent</button>
+                </li>
+            </ul>
+
+            <!-- Campaigns Table -->
+            <div class="tab-pane active" id="campaignsTab">
                 <div class="table-container">
-                    <h5 class="mb-3">Upload History</h5>
-                    <div id="historyList"></div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Campaign</th>
+                                <th>Agents</th>
+                                <th>Total Calls</th>
+                                <th>Total Sales</th>
+                                <th>Closing Ratio</th>
+                            </tr>
+                        </thead>
+                        <tbody id="campaignsTable"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Team Leaders Table -->
+            <div class="tab-pane" id="teamleadersTab" style="display: none;">
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Team Leader</th>
+                                <th>Agents</th>
+                                <th>Campaigns</th>
+                                <th>Total Calls</th>
+                                <th>Total Sales</th>
+                                <th>Closing Ratio</th>
+                            </tr>
+                        </thead>
+                        <tbody id="teamLeadersTable"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Agents Table -->
+            <div class="tab-pane" id="agentsTab" style="display: none;">
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Agent</th>
+                                <th>ID</th>
+                                <th>Team Leader</th>
+                                <th>Campaigns</th>
+                                <th>Calls</th>
+                                <th>Sales</th>
+                                <th>Ratio</th>
+                            </tr>
+                        </thead>
+                        <tbody id="agentsTable"></tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modals -->
-    <div class="modal fade" id="logoutConfirmModal" tabindex="-1">
-        <div class="modal-dialog"><div class="modal-content">
-            <div class="modal-header"><h5>Confirm Logout</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
-            <div class="modal-body"><p>Are you sure you want to logout?</p></div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button class="btn btn-danger" onclick="logout()">Logout</button>
-            </div>
-        </div></div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script>
-        // Global variables
-        let currentUser = null;
-        let selectedRole = 'admin';
-        let performanceData = { campaigns: {}, teamLeaders: {}, agents: {}, records: [] };
-        let uploadHistory = [];
-        let currentFilters = { campaign: 'all', team_leader: 'all', agent: 'all' };
-        let currentPreviewId = null;
+        // Global data storage - shared across all users!
+        let sharedData = {
+            records: [],
+            campaigns: {},
+            teamLeaders: {},
+            agents: {},
+            lastUpdated: null
+        };
+
+        let currentFilters = {
+            campaign: 'all',
+            team_leader: 'all',
+            agent: 'all'
+        };
+
+        let isAdmin = false;
 
         // Campaign list
         const CAMPAIGNS = ['ABSA', 'CARTRACK', 'A&G', 'BUDGET', 'DAIL DIRECT', 'FIRTS FOR WOMEN', 
                           'DISCOVERY', 'IWYZE', 'NEW MIWAY', 'DEALER', 'KP2', 'OLD MIWAY'];
 
-        // User credentials
-        const USERS = {
-            admin: { password: 'admin123', role: 'admin', name: 'Admin User' },
-            user: { password: 'user123', role: 'user', name: 'Viewer User' }
-        };
-
-        // GitHub Gist storage (using a public API)
-        const GITHUB_GIST_API = 'https://api.github.com/gists';
-        // Note: This is a public gist - anyone can read it
-        // For production, you'd want to use your own GitHub token
-        const PUBLIC_GIST_ID = 'your-gist-id'; // You'll need to create a gist first
-
-        // Initialize
+        // Initialize - load any existing data
         document.addEventListener('DOMContentLoaded', function() {
-            loadFromStorage();
-            selectRole('admin');
+            loadSharedData();
             
-            // Check for data key in URL
+            // Check URL for admin status (optional)
             const urlParams = new URLSearchParams(window.location.search);
-            const dataKey = urlParams.get('data');
-            if (dataKey) {
-                document.getElementById('dataKeyInput').value = dataKey;
-                setTimeout(() => loadSharedData(), 500);
+            if (urlParams.get('admin') === 'true') {
+                toggleAdminPanel();
             }
-            
-            window.addEventListener('popstate', function() {
-                if (currentUser) showSection('dashboard');
-            });
         });
 
-        // Storage functions
-        function loadFromStorage() {
-            try {
-                const saved = localStorage.getItem('mtdClosingRatio');
-                if (saved) {
-                    const data = JSON.parse(saved);
-                    performanceData = data.performanceData || performanceData;
-                    uploadHistory = data.uploadHistory || [];
-                }
-                
-                // Also check sessionStorage
-                const sessionSaved = sessionStorage.getItem('mtdClosingRatio');
-                if (sessionSaved && (!saved || performanceData.records.length === 0)) {
-                    const data = JSON.parse(sessionSaved);
-                    performanceData = data.performanceData || performanceData;
-                    uploadHistory = data.uploadHistory || [];
-                }
-            } catch (e) {
-                console.error('Error loading data:', e);
-            }
-        }
-
-        function saveToStorage() {
-            try {
-                const data = JSON.stringify({
-                    performanceData: performanceData,
-                    uploadHistory: uploadHistory
-                });
-                localStorage.setItem('mtdClosingRatio', data);
-                sessionStorage.setItem('mtdClosingRatio', data);
-            } catch (e) {
-                console.error('Error saving data:', e);
-            }
-        }
-
-        // GitHub Data Sharing Functions
-        function generateShareableData() {
-            if (!currentUser || currentUser.role !== 'admin') {
-                showToast('Only admins can generate share links', 'danger');
-                return;
-            }
-
-            // Create a unique key based on date
-            const today = new Date();
-            const dataKey = `mtd-${today.getFullYear()}-${(today.getMonth()+1).toString().padStart(2,'0')}-${today.getDate().toString().padStart(2,'0')}`;
-            
-            // Prepare data for sharing
-            const shareData = {
-                performanceData: performanceData,
-                uploadHistory: uploadHistory,
-                generatedAt: new Date().toISOString(),
-                generatedBy: currentUser.name,
-                version: '1.0'
-            };
-
-            // Encode data for URL
-            const encodedData = btoa(JSON.stringify(shareData));
-            
-            // Create shareable link
-            const baseUrl = window.location.href.split('?')[0];
-            const shareLink = `${baseUrl}?data=${dataKey}#${encodedData.slice(0, 100)}`;
-            
-            // Store in session for retrieval
-            sessionStorage.setItem(`shared_${dataKey}`, JSON.stringify(shareData));
-            
-            // Also store in multiple places for redundancy
-            localStorage.setItem(`shared_${dataKey}`, JSON.stringify(shareData));
-            
-            // Show the link
-            document.getElementById('shareLinkText').textContent = dataKey;
-            document.getElementById('shareLinkContainer').style.display = 'block';
-            
-            // Also create a simple key they can type
-            showToast(`Share this key with your team: ${dataKey}`, 'success');
-        }
-
-        function copyShareableLink() {
-            const dataKey = document.getElementById('shareLinkText').textContent;
-            navigator.clipboard.writeText(dataKey);
-            showToast('Data key copied to clipboard!', 'success');
-        }
-
+        // Load data from storage
         function loadSharedData() {
-            const input = document.getElementById('dataKeyInput').value.trim();
-            if (!input) {
-                showToast('Please enter a data key', 'warning');
-                return;
-            }
-
-            showLoading('Loading shared data...');
-
-            // Extract key if it's a full URL
-            let dataKey = input;
-            if (input.includes('?data=')) {
-                const match = input.match(/[?&]data=([^&]+)/);
-                if (match) dataKey = match[1];
-            }
-
-            // Try to load from sessionStorage first
-            let sharedData = sessionStorage.getItem(`shared_${dataKey}`);
-            
-            // If not in session, try localStorage
-            if (!sharedData) {
-                sharedData = localStorage.getItem(`shared_${dataKey}`);
-            }
-
-            if (sharedData) {
+            const saved = localStorage.getItem('mtd_shared_data');
+            if (saved) {
                 try {
-                    const data = JSON.parse(sharedData);
-                    if (data.performanceData) {
-                        performanceData = data.performanceData;
-                        uploadHistory = data.uploadHistory || [];
-                        saveToStorage();
-                        
-                        if (currentUser) {
-                            refreshData();
-                        }
-                        
-                        const date = data.generatedAt ? new Date(data.generatedAt).toLocaleString() : 'recent';
-                        showToast(`Data loaded successfully from ${date}`, 'success');
-                    }
+                    sharedData = JSON.parse(saved);
+                    document.getElementById('dataStatus').innerHTML = 
+                        `<i class="fas fa-check-circle text-success me-1"></i>Last updated: ${sharedData.lastUpdated || 'Recently'}`;
+                    updateAllDisplays();
                 } catch (e) {
-                    showToast('Error loading shared data', 'danger');
+                    console.error('Error loading data');
                 }
-            } else {
-                // If not found in storage, create a default dataset
-                showToast('No shared data found. Please ask admin to generate a link first.', 'warning');
             }
+        }
+
+        // Save data to storage (instantly shared with everyone!)
+        function saveSharedData() {
+            sharedData.lastUpdated = new Date().toLocaleString();
+            localStorage.setItem('mtd_shared_data', JSON.stringify(sharedData));
             
-            hideLoading();
+            // Also save to sessionStorage as backup
+            sessionStorage.setItem('mtd_shared_data', JSON.stringify(sharedData));
+            
+            document.getElementById('dataStatus').innerHTML = 
+                `<i class="fas fa-check-circle text-success me-1"></i>Last updated: ${sharedData.lastUpdated}`;
+            
+            updateAllDisplays();
         }
 
-        // Role selection
-        function selectRole(role) {
-            selectedRole = role;
-            document.getElementById('adminRoleBtn').classList.remove('selected');
-            document.getElementById('userRoleBtn').classList.remove('selected');
-            document.getElementById(role + 'RoleBtn').classList.add('selected');
-            document.getElementById('username').value = role;
+        // Admin Panel Functions
+        function toggleAdminPanel() {
+            if (isAdmin) {
+                // Already admin, show upload panel
+                document.getElementById('adminUploadPanel').style.display = 'block';
+                document.getElementById('adminLoginPanel').style.display = 'none';
+            } else {
+                // Show login
+                document.getElementById('adminLoginPanel').style.display = 'block';
+                document.getElementById('adminUploadPanel').style.display = 'none';
+            }
         }
 
-        // Login
-        function handleLogin(event) {
+        function hideAdminPanel() {
+            document.getElementById('adminLoginPanel').style.display = 'none';
+            document.getElementById('adminUploadPanel').style.display = 'none';
+        }
+
+        function handleAdminLogin(event) {
             event.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
             
-            const user = USERS[username];
-            if (user && user.password === password) {
-                if (user.role !== selectedRole) {
-                    showToast(`Please select ${user.role} role`, 'warning');
-                    return;
-                }
-                
-                currentUser = { username, role: user.role, name: user.name };
-                document.body.className = user.role;
-                
-                document.getElementById('loginSection').style.display = 'none';
-                document.getElementById('mainApp').style.display = 'block';
-                
-                document.getElementById('usernameDisplay').textContent = user.name;
-                document.getElementById('sidebarUsername').textContent = user.name;
-                
-                const roleBadge = document.getElementById('sidebarRole');
-                roleBadge.className = `role-badge ${user.role}`;
-                roleBadge.textContent = user.role === 'admin' ? 'Administrator' : 'Viewer';
-                
-                const roleDisplay = document.getElementById('roleDisplay');
-                roleDisplay.className = `role-indicator ${user.role}`;
-                roleDisplay.textContent = user.role === 'admin' ? 'Admin' : 'Viewer';
-                
-                showSection('dashboard');
-                refreshData();
-                showToast(`Welcome ${user.name}!`, 'success');
+            if (username === 'admin' && password === 'admin123') {
+                isAdmin = true;
+                document.getElementById('roleIndicator').style.display = 'inline-block';
+                document.getElementById('adminLoginPanel').style.display = 'none';
+                document.getElementById('adminUploadPanel').style.display = 'block';
+                document.getElementById('adminToggleBtn').innerHTML = '<i class="fas fa-crown me-2"></i>Admin Panel';
             } else {
-                showToast('Invalid credentials', 'danger');
+                alert('Invalid credentials');
             }
         }
 
-        // Logout
-        function confirmLogout() {
-            new bootstrap.Modal(document.getElementById('logoutConfirmModal')).show();
-        }
-
-        function logout() {
-            currentUser = null;
-            document.body.className = '';
-            document.getElementById('mainApp').style.display = 'none';
-            document.getElementById('loginSection').style.display = 'block';
-            document.getElementById('sidebar').classList.remove('active');
-            showToast('Logged out', 'info');
-        }
-
-        // UI Functions
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('active');
-        }
-
-        function showSection(sectionId) {
-            if ((sectionId === 'upload' || sectionId === 'history') && (!currentUser || currentUser.role !== 'admin')) {
-                showToast('Access denied', 'danger');
-                return;
-            }
-            
-            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-            event.target.closest('.nav-link').classList.add('active');
-            
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.getElementById(sectionId + 'Section').classList.add('active');
-            
-            const titles = { dashboard:'Dashboard', upload:'Upload Data', campaigns:'Campaigns', 
-                           agents:'Agents', leaders:'Team Leaders', rankings:'Rankings', history:'History' };
-            document.getElementById('pageTitle').textContent = titles[sectionId];
-            
-            if (sectionId === 'campaigns') loadCampaignsData();
-            if (sectionId === 'agents') loadAgentsData();
-            if (sectionId === 'leaders') loadTeamLeadersData();
-            if (sectionId === 'rankings') loadRankingsData();
-            if (sectionId === 'history') refreshHistory();
-            
-            if (window.innerWidth <= 768) {
-                document.getElementById('sidebar').classList.remove('active');
-            }
-        }
-
-        function showTab(tabName) {
-            document.querySelectorAll('.nav-tabs .nav-link').forEach(b => b.classList.remove('active'));
-            event.target.classList.add('active');
-            document.querySelectorAll('.tab-pane').forEach(t => t.style.display = 'none');
-            document.getElementById(tabName + 'Tab').style.display = 'block';
-        }
-
-        function showLoading(msg = 'Loading...') {
-            document.getElementById('loadingMessage').textContent = msg;
-            document.getElementById('loadingOverlay').classList.add('active');
-        }
-
-        function hideLoading() {
-            document.getElementById('loadingOverlay').classList.remove('active');
-        }
-
-        function showToast(message, type = 'success') {
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            toast.innerHTML = `<i class="fas ${type==='success'?'fa-check-circle':type==='danger'?'fa-exclamation-circle':'fa-info-circle'} me-2"></i>${message}`;
-            document.getElementById('toastContainer').appendChild(toast);
-            setTimeout(() => toast.remove(), 3000);
-        }
-
-        // File Upload
+        // File Upload (Admin only)
         function handleFileUpload(input) {
-            if (!currentUser || currentUser.role !== 'admin') {
-                showToast('Only admins can upload', 'danger');
+            if (!isAdmin) {
+                alert('Admin access required');
                 return;
             }
-            
+
             const file = input.files[0];
             if (!file) return;
-            
-            showLoading('Reading file...');
-            
+
+            document.getElementById('uploadProgress').style.display = 'block';
+            document.getElementById('progressBar').style.width = '30%';
+            document.getElementById('progressText').textContent = 'Reading file...';
+
             const reader = new FileReader();
             reader.onload = function(e) {
                 try {
                     const data = new Uint8Array(e.target.result);
                     const workbook = XLSX.read(data, { type: 'array' });
                     
-                    const allRecords = [];
-                    const processedSheets = [];
-                    const errors = [];
+                    document.getElementById('progressBar').style.width = '60%';
+                    document.getElementById('progressText').textContent = 'Processing data...';
+
+                    const records = [];
                     
                     workbook.SheetNames.forEach(sheetName => {
-                        if (!sheetName || sheetName === 'Sheet12') return;
+                        if (sheetName === 'Sheet12' || !sheetName.trim()) return;
                         
                         const worksheet = workbook.Sheets[sheetName];
                         const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
@@ -1257,10 +627,7 @@
                             }
                         }
                         
-                        if (headerRow === -1) {
-                            errors.push(`Sheet ${sheetName}: No header`);
-                            return;
-                        }
+                        if (headerRow === -1) return;
                         
                         for (let i = headerRow + 1; i < jsonData.length; i++) {
                             const row = jsonData[i];
@@ -1278,161 +645,108 @@
                             const salesNum = parseFloat(sales) || 0;
                             
                             if (callsNum > 0 && userName && userId && teamLeader) {
-                                allRecords.push({
-                                    'USER NAME': userName.toString().trim(),
-                                    'ID': userId.toString().trim(),
-                                    'TEAM LEADER': teamLeader.toString().trim(),
-                                    'CALLS': callsNum,
-                                    'SALE': salesNum,
-                                    'CAMPAIGN': sheetName,
-                                    'closingRatio': ((salesNum / callsNum) * 100).toFixed(2)
+                                records.push({
+                                    campaign: sheetName,
+                                    name: userName.toString().trim(),
+                                    id: userId.toString().trim(),
+                                    leader: teamLeader.toString().trim(),
+                                    calls: callsNum,
+                                    sales: salesNum,
+                                    ratio: ((salesNum / callsNum) * 100).toFixed(2)
                                 });
                             }
                         }
-                        processedSheets.push(sheetName);
                     });
-                    
-                    if (allRecords.length > 0) {
-                        processUploadedData(allRecords, file.name, processedSheets, errors);
-                    } else {
-                        hideLoading();
-                        showToast('No valid records found', 'warning');
+
+                    if (records.length > 0) {
+                        document.getElementById('progressBar').style.width = '90%';
+                        document.getElementById('progressText').textContent = 'Saving data...';
+                        
+                        processRecords(records);
+                        saveSharedData();
+                        
+                        document.getElementById('progressBar').style.width = '100%';
+                        document.getElementById('progressText').textContent = 'Complete!';
+                        
+                        setTimeout(() => {
+                            document.getElementById('uploadProgress').style.display = 'none';
+                        }, 1000);
                     }
                     
                 } catch (error) {
-                    hideLoading();
-                    showToast('Error: ' + error.message, 'danger');
+                    alert('Error: ' + error.message);
+                    document.getElementById('uploadProgress').style.display = 'none';
                 }
             };
             reader.readAsArrayBuffer(file);
         }
 
-        function processUploadedData(records, filename, sheets, errors) {
-            performanceData = { campaigns: {}, teamLeaders: {}, agents: {}, records: [] };
+        function processRecords(records) {
+            // Reset data
+            sharedData = {
+                records: records,
+                campaigns: {},
+                teamLeaders: {},
+                agents: {},
+                lastUpdated: new Date().toLocaleString()
+            };
             
             records.forEach(record => {
-                performanceData.records.push({ ...record, id: Date.now() + Math.random(), uploadDate: new Date().toISOString() });
-                
-                const campaign = record['CAMPAIGN'];
-                if (!performanceData.campaigns[campaign]) {
-                    performanceData.campaigns[campaign] = { totalCalls: 0, totalSales: 0, agents: new Set(), records: [] };
+                // Campaign
+                if (!sharedData.campaigns[record.campaign]) {
+                    sharedData.campaigns[record.campaign] = {
+                        totalCalls: 0, totalSales: 0, agents: new Set()
+                    };
                 }
-                performanceData.campaigns[campaign].totalCalls += record['CALLS'];
-                performanceData.campaigns[campaign].totalSales += record['SALE'];
-                performanceData.campaigns[campaign].agents.add(record['USER NAME']);
-                performanceData.campaigns[campaign].records.push(record);
-                
-                const leader = record['TEAM LEADER'];
-                if (!performanceData.teamLeaders[leader]) {
-                    performanceData.teamLeaders[leader] = { totalCalls: 0, totalSales: 0, agents: new Set(), campaigns: new Set() };
+                sharedData.campaigns[record.campaign].totalCalls += record.calls;
+                sharedData.campaigns[record.campaign].totalSales += record.sales;
+                sharedData.campaigns[record.campaign].agents.add(record.name);
+
+                // Team Leader
+                if (!sharedData.teamLeaders[record.leader]) {
+                    sharedData.teamLeaders[record.leader] = {
+                        totalCalls: 0, totalSales: 0, agents: new Set(), campaigns: new Set()
+                    };
                 }
-                performanceData.teamLeaders[leader].totalCalls += record['CALLS'];
-                performanceData.teamLeaders[leader].totalSales += record['SALE'];
-                performanceData.teamLeaders[leader].agents.add(record['USER NAME']);
-                performanceData.teamLeaders[leader].campaigns.add(campaign);
-                
-                const agentKey = `${record['USER NAME']} (${record['ID']})`;
-                if (!performanceData.agents[agentKey]) {
-                    performanceData.agents[agentKey] = {
-                        name: record['USER NAME'], userId: record['ID'], teamLeader: record['TEAM LEADER'],
+                sharedData.teamLeaders[record.leader].totalCalls += record.calls;
+                sharedData.teamLeaders[record.leader].totalSales += record.sales;
+                sharedData.teamLeaders[record.leader].agents.add(record.name);
+                sharedData.teamLeaders[record.leader].campaigns.add(record.campaign);
+
+                // Agent
+                const agentKey = `${record.name} (${record.id})`;
+                if (!sharedData.agents[agentKey]) {
+                    sharedData.agents[agentKey] = {
+                        name: record.name, id: record.id, leader: record.leader,
                         campaigns: new Set(), totalCalls: 0, totalSales: 0
                     };
                 }
-                performanceData.agents[agentKey].totalCalls += record['CALLS'];
-                performanceData.agents[agentKey].totalSales += record['SALE'];
-                performanceData.agents[agentKey].campaigns.add(campaign);
-            });
-            
-            const summary = {
-                totalCalls: records.reduce((s,r) => s + r['CALLS'], 0),
-                totalSales: records.reduce((s,r) => s + r['SALE'], 0),
-                uniqueAgents: new Set(records.map(r => r['USER NAME'])).size,
-                uniqueTeamLeaders: new Set(records.map(r => r['TEAM LEADER'])).size,
-                avgRatio: ((records.reduce((s,r) => s + r['SALE'], 0) / records.reduce((s,r) => s + r['CALLS'], 0)) * 100).toFixed(2)
-            };
-            
-            uploadHistory.unshift({
-                id: Date.now(),
-                date: new Date().toLocaleString(),
-                filename,
-                campaigns: sheets.length,
-                campaignList: sheets,
-                records: records.length,
-                valid: records.length,
-                invalid: errors.length,
-                errors,
-                status: errors.length === 0 ? 'Success' : 'Partial',
-                data: records,
-                summary,
-                uploadedBy: currentUser.name
-            });
-            
-            if (uploadHistory.length > 20) uploadHistory = uploadHistory.slice(0, 20);
-            
-            saveToStorage();
-            hideLoading();
-            
-            const results = document.getElementById('validationResults');
-            results.style.display = 'block';
-            results.innerHTML = `<div class="alert alert-success">Uploaded ${records.length} records from ${sheets.length} campaigns</div>`;
-            
-            refreshData();
-            if (currentUser?.role === 'admin') refreshHistory();
-            
-            // Automatically generate shareable data after upload
-            setTimeout(() => generateShareableData(), 500);
-        }
-
-        // Dashboard Functions
-        function refreshData() {
-            showLoading('Updating...');
-            setTimeout(() => {
-                updateDashboard();
-                hideLoading();
-            }, 300);
-        }
-
-        function applyFilters() {
-            currentFilters = {
-                campaign: document.getElementById('campaignFilter').value,
-                team_leader: document.getElementById('teamLeaderFilter').value,
-                agent: document.getElementById('agentFilter').value
-            };
-            updateDashboard();
-        }
-
-        function filterRecords(records) {
-            return records.filter(r => {
-                if (currentFilters.campaign !== 'all' && r['CAMPAIGN'] !== currentFilters.campaign) return false;
-                if (currentFilters.team_leader !== 'all' && r['TEAM LEADER'] !== currentFilters.team_leader) return false;
-                if (currentFilters.agent !== 'all' && r['USER NAME'] !== currentFilters.agent) return false;
-                return true;
+                sharedData.agents[agentKey].totalCalls += record.calls;
+                sharedData.agents[agentKey].totalSales += record.sales;
+                sharedData.agents[agentKey].campaigns.add(record.campaign);
             });
         }
 
-        function updateDashboard() {
-            updateSummaryStats();
-            updateStatCards();
+        // Update all displays
+        function updateAllDisplays() {
+            updateFilters();
             updateCampaignQuickStats();
-            updateRankings();
+            updateStatCards();
             updateCampaignsTable();
             updateTeamLeadersTable();
             updateAgentsTable();
-            updateFilters();
-        }
-
-        function updateSummaryStats() {
-            const filtered = filterRecords(performanceData.records);
-            document.getElementById('totalCampaigns').textContent = new Set(filtered.map(r => r['CAMPAIGN'])).size;
-            document.getElementById('totalAgents').textContent = new Set(filtered.map(r => r['USER NAME'])).size;
-            document.getElementById('totalCalls').textContent = filtered.reduce((s,r) => s + r['CALLS'], 0).toLocaleString();
-            document.getElementById('totalSales').textContent = filtered.reduce((s,r) => s + r['SALE'], 0).toLocaleString();
         }
 
         function updateFilters() {
-            updateSelect('campaignFilter', new Set(performanceData.records.map(r => r['CAMPAIGN'])), currentFilters.campaign);
-            updateSelect('teamLeaderFilter', new Set(performanceData.records.map(r => r['TEAM LEADER'])), currentFilters.team_leader);
-            updateSelect('agentFilter', new Set(performanceData.records.map(r => r['USER NAME'])), currentFilters.agent);
+            if (!sharedData.records.length) return;
+            
+            const campaigns = new Set(sharedData.records.map(r => r.campaign));
+            const leaders = new Set(sharedData.records.map(r => r.leader));
+            const agents = new Set(sharedData.records.map(r => r.name));
+            
+            updateSelect('campaignFilter', campaigns, currentFilters.campaign);
+            updateSelect('teamLeaderFilter', leaders, currentFilters.team_leader);
+            updateSelect('agentFilter', agents, currentFilters.agent);
         }
 
         function updateSelect(id, options, selected) {
@@ -1443,165 +757,178 @@
             });
         }
 
-        function updateStatCards() {
-            const filtered = filterRecords(performanceData.records);
-            const totalCalls = filtered.reduce((s,r) => s + r['CALLS'], 0);
-            const totalSales = filtered.reduce((s,r) => s + r['SALE'], 0);
-            const avgRatio = totalCalls ? ((totalSales / totalCalls) * 100).toFixed(2) : 0;
+        function applyFilters() {
+            currentFilters = {
+                campaign: document.getElementById('campaignFilter').value,
+                team_leader: document.getElementById('teamLeaderFilter').value,
+                agent: document.getElementById('agentFilter').value
+            };
             
-            document.getElementById('statCards').innerHTML = `
-                <div class="col-sm-6 col-lg-3"><div class="stat-card"><div class="stat-icon blue"><i class="fas fa-bullhorn"></i></div><div><h6 class="text-muted">Campaigns</h6><h3>${Object.keys(performanceData.campaigns).length}</h3></div></div></div>
-                <div class="col-sm-6 col-lg-3"><div class="stat-card"><div class="stat-icon green"><i class="fas fa-users"></i></div><div><h6 class="text-muted">Team Leaders</h6><h3>${new Set(filtered.map(r => r['TEAM LEADER'])).size}</h3></div></div></div>
-                <div class="col-sm-6 col-lg-3"><div class="stat-card"><div class="stat-icon orange"><i class="fas fa-percentage"></i></div><div><h6 class="text-muted">Avg Ratio</h6><h3>${avgRatio}%</h3></div></div></div>
-                <div class="col-sm-6 col-lg-3"><div class="stat-card"><div class="stat-icon purple"><i class="fas fa-star"></i></div><div><h6 class="text-muted">Top Performers</h6><h3>${Object.values(performanceData.agents).filter(a => (a.totalSales/a.totalCalls*100) >= 10).length}</h3></div></div></div>
-            `;
+            const filtered = sharedData.records.filter(r => {
+                if (currentFilters.campaign !== 'all' && r.campaign !== currentFilters.campaign) return false;
+                if (currentFilters.team_leader !== 'all' && r.leader !== currentFilters.team_leader) return false;
+                if (currentFilters.agent !== 'all' && r.name !== currentFilters.agent) return false;
+                return true;
+            });
+
+            updateStatCards(filtered);
         }
 
         function updateCampaignQuickStats() {
             let html = '';
             CAMPAIGNS.forEach(c => {
-                const data = performanceData.campaigns[c];
+                const data = sharedData.campaigns[c];
                 if (data) {
                     const ratio = data.totalCalls ? ((data.totalSales / data.totalCalls) * 100).toFixed(2) : 0;
-                    html += `<span class="campaign-badge" onclick="filterByCampaign('${c}')">${c}: ${ratio}% (${data.agents.size})</span>`;
+                    html += `<span class="campaign-badge" onclick="filterByCampaign('${c}')">${c}: ${ratio}%</span>`;
                 } else {
-                    html += `<span class="campaign-badge bg-secondary">${c}: No data</span>`;
+                    html += `<span class="campaign-badge" style="background: #95a5a6;">${c}: No data</span>`;
                 }
             });
-            document.getElementById('campaignQuickStats').innerHTML = html || 'No data';
+            document.getElementById('campaignQuickStats').innerHTML = html;
         }
 
         function filterByCampaign(campaign) {
             document.getElementById('campaignFilter').value = campaign;
             currentFilters.campaign = campaign;
-            updateDashboard();
-            showSection('dashboard');
+            applyFilters();
         }
 
-        function updateRankings() {
-            const agents = Object.values(performanceData.agents).map(a => ({
-                ...a,
-                ratio: a.totalCalls ? ((a.totalSales / a.totalCalls) * 100).toFixed(2) : 0,
-                campaignsCount: a.campaigns.size
-            })).sort((a,b) => b.ratio - a.ratio);
+        function updateStatCards(filtered) {
+            const records = filtered || sharedData.records;
+            if (!records.length) {
+                document.getElementById('statCards').innerHTML = '<div class="col-12"><p class="text-center">No data available</p></div>';
+                return;
+            }
             
-            const top10 = agents.slice(0,10);
-            const bottom10 = agents.slice(-10).reverse();
-            
-            document.getElementById('topPerformers').innerHTML = top10.map((a,i) => `
-                <div class="ranking-card high"><div class="d-flex justify-content-between"><div><span class="ranking-position">#${i+1}</span><h6>${a.name}</h6><small>${a.teamLeader}</small></div><div><span class="badge-high">${a.ratio}%</span><br><small>${a.totalSales}/${a.totalCalls}</small></div></div></div>
-            `).join('') || 'No data';
-            
-            document.getElementById('bottomPerformers').innerHTML = bottom10.map((a,i) => `
-                <div class="ranking-card low"><div class="d-flex justify-content-between"><div><span class="ranking-position">#${agents.length - i}</span><h6>${a.name}</h6><small>${a.teamLeader}</small></div><div><span class="badge-low">${a.ratio}%</span><br><small>${a.totalSales}/${a.totalCalls}</small></div></div></div>
-            `).join('') || 'No data';
-            
-            document.getElementById('highestRankings').innerHTML = top10.map((a,i) => `
-                <div class="ranking-card high"><div><span class="ranking-position">#${i+1}</span><h6>${a.name}</h6><small>${a.teamLeader}</small><div class="mt-2"><span class="badge-high">${a.ratio}%</span> <small>${a.totalSales}/${a.totalCalls}</small></div></div></div>
-            `).join('') || 'No data';
-            
-            document.getElementById('lowestRankings').innerHTML = bottom10.map((a,i) => `
-                <div class="ranking-card low"><div><span class="ranking-position">#${agents.length - i}</span><h6>${a.name}</h6><small>${a.teamLeader}</small><div class="mt-2"><span class="badge-low">${a.ratio}%</span> <small>${a.totalSales}/${a.totalCalls}</small></div></div></div>
-            `).join('') || 'No data';
+            const totalCalls = records.reduce((s,r) => s + r.calls, 0);
+            const totalSales = records.reduce((s,r) => s + r.sales, 0);
+            const avgRatio = totalCalls ? ((totalSales / totalCalls) * 100).toFixed(2) : 0;
+
+            document.getElementById('statCards').innerHTML = `
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-icon blue"><i class="fas fa-bullhorn"></i></div>
+                        <div>
+                            <h6 class="text-muted">Campaigns</h6>
+                            <h3>${Object.keys(sharedData.campaigns).length}</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-icon green"><i class="fas fa-users"></i></div>
+                        <div>
+                            <h6 class="text-muted">Agents</h6>
+                            <h3>${new Set(records.map(r => r.name)).size}</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-icon orange"><i class="fas fa-phone"></i></div>
+                        <div>
+                            <h6 class="text-muted">Total Calls</h6>
+                            <h3>${totalCalls.toLocaleString()}</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-icon purple"><i class="fas fa-percentage"></i></div>
+                        <div>
+                            <h6 class="text-muted">Avg Ratio</h6>
+                            <h3>${avgRatio}%</h3>
+                        </div>
+                    </div>
+                </div>
+            `;
         }
 
         function updateCampaignsTable() {
             let html = '';
             CAMPAIGNS.forEach(c => {
-                const data = performanceData.campaigns[c];
+                const data = sharedData.campaigns[c];
                 if (data) {
                     const ratio = data.totalCalls ? ((data.totalSales / data.totalCalls) * 100).toFixed(2) : 0;
-                    html += `<tr><td>${c}</td><td>${data.agents.size}</td><td>${data.totalCalls.toLocaleString()}</td><td>${data.totalSales.toLocaleString()}</td><td><span class="badge-performance ${ratio>=8?'badge-high':ratio>=5?'badge-medium':'badge-low'}">${ratio}%</span></td></tr>`;
+                    const badgeClass = ratio >= 8 ? 'badge-high' : ratio >= 5 ? 'badge-medium' : 'badge-low';
+                    html += `<tr>
+                        <td>${c}</td>
+                        <td>${data.agents.size}</td>
+                        <td>${data.totalCalls.toLocaleString()}</td>
+                        <td>${data.totalSales.toLocaleString()}</td>
+                        <td><span class="badge-performance ${badgeClass}">${ratio}%</span></td>
+                    </tr>`;
                 } else {
                     html += `<tr><td>${c}</td><td colspan="4" class="text-muted">No data</td></tr>`;
                 }
             });
             document.getElementById('campaignsTable').innerHTML = html;
-            document.getElementById('allCampaignsTable').innerHTML = html;
         }
 
         function updateTeamLeadersTable() {
             let html = '';
-            for (const [name, data] of Object.entries(performanceData.teamLeaders)) {
+            for (const [name, data] of Object.entries(sharedData.teamLeaders)) {
                 const ratio = data.totalCalls ? ((data.totalSales / data.totalCalls) * 100).toFixed(2) : 0;
-                html += `<tr><td>${name}</td><td>${data.agents.size}</td><td>${data.campaigns.size}</td><td>${data.totalCalls.toLocaleString()}</td><td>${data.totalSales.toLocaleString()}</td><td><span class="badge-performance ${ratio>=8?'badge-high':ratio>=5?'badge-medium':'badge-low'}">${ratio}%</span></td></tr>`;
+                const badgeClass = ratio >= 8 ? 'badge-high' : ratio >= 5 ? 'badge-medium' : 'badge-low';
+                html += `<tr>
+                    <td>${name}</td>
+                    <td>${data.agents.size}</td>
+                    <td>${data.campaigns.size}</td>
+                    <td>${data.totalCalls.toLocaleString()}</td>
+                    <td>${data.totalSales.toLocaleString()}</td>
+                    <td><span class="badge-performance ${badgeClass}">${ratio}%</span></td>
+                </tr>`;
             }
             document.getElementById('teamLeadersTable').innerHTML = html || '<tr><td colspan="6" class="text-center">No data</td></tr>';
-            document.getElementById('allTeamLeadersTable').innerHTML = html || '<tr><td colspan="6" class="text-center">No data</td></tr>';
         }
 
         function updateAgentsTable() {
             let html = '';
-            const agents = Object.values(performanceData.agents).map(a => ({
-                ...a,
-                ratio: a.totalCalls ? ((a.totalSales / a.totalCalls) * 100).toFixed(2) : 0,
-                campaignsCount: a.campaigns.size
-            })).sort((a,b) => b.ratio - a.ratio);
+            const agents = Object.values(sharedData.agents)
+                .map(a => ({
+                    ...a,
+                    ratio: a.totalCalls ? ((a.totalSales / a.totalCalls) * 100).toFixed(2) : 0,
+                    campaignsCount: a.campaigns.size
+                }))
+                .sort((a,b) => b.ratio - a.ratio);
             
-            agents.forEach((a,i) => {
-                html += `<tr><td>${a.name}</td><td>${a.userId}</td><td>${a.teamLeader}</td><td>${a.campaignsCount}</td><td>${a.totalCalls.toLocaleString()}</td><td>${a.totalSales.toLocaleString()}</td><td><span class="badge-performance ${a.ratio>=10?'badge-high':a.ratio>=5?'badge-medium':'badge-low'}">${a.ratio}%</span></td><td>#${i+1}</td></tr>`;
+            agents.forEach(a => {
+                const badgeClass = a.ratio >= 10 ? 'badge-high' : a.ratio >= 5 ? 'badge-medium' : 'badge-low';
+                html += `<tr>
+                    <td>${a.name}</td>
+                    <td>${a.id}</td>
+                    <td>${a.leader}</td>
+                    <td>${a.campaignsCount}</td>
+                    <td>${a.totalCalls.toLocaleString()}</td>
+                    <td>${a.totalSales.toLocaleString()}</td>
+                    <td><span class="badge-performance ${badgeClass}">${a.ratio}%</span></td>
+                </tr>`;
             });
-            
-            document.getElementById('agentsTable').innerHTML = html || '<tr><td colspan="8" class="text-center">No data</td></tr>';
-            document.getElementById('agentsFullTable').innerHTML = html || '<tr><td colspan="8" class="text-center">No data</td></tr>';
+            document.getElementById('agentsTable').innerHTML = html;
         }
 
-        function loadCampaignsData() { updateCampaignsTable(); }
-        function loadAgentsData() { updateAgentsTable(); }
-        function loadTeamLeadersData() { updateTeamLeadersTable(); }
-        function loadRankingsData() { updateRankings(); }
-
-        function refreshHistory() {
-            if (!currentUser || currentUser.role !== 'admin') return;
-            
-            const list = document.getElementById('historyList');
-            if (uploadHistory.length === 0) {
-                list.innerHTML = '<p class="text-muted text-center">No upload history</p>';
-                return;
-            }
-            
-            list.innerHTML = uploadHistory.map(r => `
-                <div class="border p-3 mb-2 rounded">
-                    <div class="d-flex justify-content-between align-items-center flex-wrap">
-                        <div><strong>${r.filename}</strong><br><small>${r.date}</small></div>
-                        <div><span class="badge bg-primary">${r.campaigns} campaigns</span> <span class="badge bg-info">${r.records} records</span></div>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function clearAllData() {
-            if (!currentUser || currentUser.role !== 'admin') {
-                showToast('Only admins can clear data', 'danger');
-                return;
-            }
-            
-            if (confirm('Clear all data? This cannot be undone.')) {
-                performanceData = { campaigns: {}, teamLeaders: {}, agents: {}, records: [] };
-                uploadHistory = [];
-                saveToStorage();
-                refreshData();
-                if (currentUser.role === 'admin') refreshHistory();
-                showToast('All data cleared', 'info');
-            }
+        function showTab(tabName) {
+            document.querySelectorAll('.nav-tabs .nav-link').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            document.querySelectorAll('.tab-pane').forEach(t => t.style.display = 'none');
+            document.getElementById(tabName + 'Tab').style.display = 'block';
         }
 
         function exportData() {
-            const data = performanceData.records.map(r => ({
-                Campaign: r.CAMPAIGN,
-                Agent: r['USER NAME'],
-                ID: r.ID,
-                Leader: r['TEAM LEADER'],
-                Calls: r.CALLS,
-                Sales: r.SALE,
-                Ratio: r.closingRatio + '%'
-            }));
+            if (!sharedData.records.length) {
+                alert('No data to export');
+                return;
+            }
             
+            const ws = XLSX.utils.json_to_sheet(sharedData.records);
             const wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(data), 'Performance');
-            XLSX.writeFile(wb, `MTD_Closing_Ratio_${new Date().toISOString().slice(0,10)}.xlsx`);
-            showToast('Data exported', 'success');
+            XLSX.utils.book_append_sheet(wb, ws, 'Data');
+            XLSX.writeFile(wb, `MTD_Data_${new Date().toISOString().slice(0,10)}.xlsx`);
         }
+
+        // Auto-refresh for all users (checks for updates every 30 seconds)
+        setInterval(loadSharedData, 30000);
     </script>
 </body>
 </html>
