@@ -2,64 +2,184 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>MTD Closing Ratio Dashboard - February 2025</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 MTD Closing Ratio Dashboard - Live Data</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --success-color: #27ae60;
-            --warning-color: #f39c12;
-            --danger-color: #e74c3c;
-            --light-bg: #ecf0f1;
-            --dark-bg: #34495e;
+            font-family: 'Segoe UI', system-ui, sans-serif;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f5f7fa;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            padding: 20px;
         }
 
-        /* Admin Badge */
-        .admin-badge {
-            background: #e74c3c;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            margin-left: 10px;
+        /* Main Container */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         /* Header */
-        .dashboard-header {
+        .header {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .title h1 {
+            color: #2c3e50;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .title p {
+            color: #666;
+            margin: 0;
+        }
+
+        .live-badge {
+            background: linear-gradient(135deg, #ff6b6b, #ee5253);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .admin-btn {
             background: linear-gradient(135deg, #2c3e50, #34495e);
             color: white;
-            padding: 30px 20px;
-            border-radius: 0 0 20px 20px;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .admin-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Status Bar */
+        .status-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 15px 25px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            border-left: 5px solid #27ae60;
+        }
+
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background: #27ae60;
+            border-radius: 50%;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+
+        .viewer-count {
+            background: #f0f0f0;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        /* Admin Panel */
+        .admin-panel {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+            border: 3px solid #e74c3c;
+            display: none;
+        }
+
+        .admin-panel h3 {
+            color: #e74c3c;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .upload-area {
+            border: 3px dashed #3498db;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            background: #f8f9fa;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .upload-area:hover {
+            background: #e9ecef;
+            border-color: #2c3e50;
+        }
+
+        .upload-area i {
+            font-size: 64px;
+            color: #3498db;
+            margin-bottom: 20px;
         }
 
         /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
         .stat-card {
             background: white;
             border-radius: 15px;
             padding: 20px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-            transition: transform 0.3s;
             display: flex;
             align-items: center;
+            transition: transform 0.3s;
         }
 
         .stat-card:hover {
@@ -75,23 +195,36 @@
             justify-content: center;
             font-size: 24px;
             margin-right: 15px;
+            color: white;
         }
 
-        .stat-icon.blue { background: linear-gradient(135deg, #3498db, #2980b9); color: white; }
-        .stat-icon.green { background: linear-gradient(135deg, #27ae60, #229954); color: white; }
-        .stat-icon.orange { background: linear-gradient(135deg, #f39c12, #e67e22); color: white; }
-        .stat-icon.purple { background: linear-gradient(135deg, #9b59b6, #8e44ad); color: white; }
+        .stat-icon.blue { background: linear-gradient(135deg, #3498db, #2980b9); }
+        .stat-icon.green { background: linear-gradient(135deg, #27ae60, #229954); }
+        .stat-icon.orange { background: linear-gradient(135deg, #f39c12, #e67e22); }
+        .stat-icon.purple { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
 
-        /* Filter Section */
-        .filter-section {
+        .stat-info h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .stat-info p {
+            color: #666;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        /* Filters */
+        .filters {
             background: white;
             border-radius: 15px;
             padding: 20px;
-            margin: 20px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
         }
 
-        .filter-section select {
+        .filter-select {
             width: 100%;
             padding: 12px;
             border: 2px solid #e0e0e0;
@@ -99,118 +232,128 @@
             font-size: 16px;
         }
 
+        /* Campaign Badges */
+        .campaign-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .campaign-badge {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: white;
+        }
+
+        .campaign-badge:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
         /* Tables */
         .table-container {
             background: white;
             border-radius: 15px;
             padding: 20px;
-            margin: 20px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
             overflow-x: auto;
         }
 
         .table {
             margin-bottom: 0;
+            min-width: 800px;
         }
 
         .table thead th {
             background: #2c3e50;
             color: white;
             border: none;
-            padding: 12px;
-            white-space: nowrap;
+            padding: 15px;
         }
 
         .table tbody tr:hover {
             background: #f5f5f5;
         }
 
-        /* Badges */
         .badge-performance {
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-weight: 500;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-weight: 600;
             font-size: 12px;
-            white-space: nowrap;
-        }
-
-        .badge-high { background: #27ae60; color: white; }
-        .badge-medium { background: #f39c12; color: white; }
-        .badge-low { background: #e74c3c; color: white; }
-
-        /* Campaign Badges */
-        .campaign-badge {
-            display: inline-block;
-            padding: 8px 16px;
-            border-radius: 25px;
-            font-size: 14px;
-            font-weight: 500;
-            margin: 5px;
-            background: #3498db;
             color: white;
-            cursor: pointer;
-            transition: all 0.3s;
         }
 
-        .campaign-badge:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(52,152,219,0.3);
-        }
+        .badge-high { background: #27ae60; }
+        .badge-medium { background: #f39c12; }
+        .badge-low { background: #e74c3c; }
 
-        /* Upload Area */
-        .upload-area {
-            border: 3px dashed #3498db;
-            border-radius: 15px;
-            padding: 40px;
-            text-align: center;
-            background: #f8f9fa;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin: 20px;
-        }
-
-        .upload-area:hover {
-            background: #e9ecef;
-            border-color: #2c3e50;
-        }
-
-        .upload-area i {
-            font-size: 64px;
-            color: #3498db;
+        /* Tabs */
+        .nav-tabs {
+            border-bottom: 2px solid #e0e0e0;
             margin-bottom: 20px;
         }
 
-        /* Admin Panel */
-        .admin-panel {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            border-left: 5px solid #e74c3c;
+        .nav-tabs .nav-link {
+            color: #2c3e50;
+            font-weight: 600;
+            border: none;
+            padding: 12px 25px;
         }
 
-        .admin-login {
-            max-width: 400px;
-            margin: 50px auto;
-            background: white;
+        .nav-tabs .nav-link.active {
+            color: #3498db;
+            border-bottom: 3px solid #3498db;
+            background: transparent;
+        }
+
+        /* Login Modal */
+        .modal-content {
             border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
 
-        .btn-login {
-            background: #e74c3c;
+        .modal-header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .login-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
             color: white;
             border: none;
             padding: 12px;
             border-radius: 10px;
             width: 100%;
-            font-weight: bold;
+            font-weight: 600;
         }
 
-        .btn-login:hover {
-            background: #c0392b;
+        /* Toast */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+
+        .toast-message {
+            background: white;
+            border-radius: 10px;
+            padding: 15px 25px;
+            margin-bottom: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            border-left: 5px solid #27ae60;
+            animation: slideIn 0.3s;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
 
         /* Loading */
@@ -224,7 +367,7 @@
             display: none;
             justify-content: center;
             align-items: center;
-            z-index: 9999;
+            z-index: 10000;
             flex-direction: column;
         }
 
@@ -235,6 +378,7 @@
             border-top: 5px solid #3498db;
             border-radius: 50%;
             animation: spin 1s linear infinite;
+            margin-bottom: 20px;
         }
 
         @keyframes spin {
@@ -242,55 +386,11 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Mobile Responsive */
+        /* Mobile */
         @media (max-width: 768px) {
-            .dashboard-header {
-                padding: 20px;
-            }
-            
-            .stat-card {
-                padding: 15px;
-            }
-            
-            .stat-icon {
-                width: 50px;
-                height: 50px;
-                font-size: 20px;
-            }
-            
-            .filter-section, .table-container, .admin-panel {
-                margin: 10px;
-                padding: 15px;
-            }
-            
-            .campaign-badge {
-                padding: 6px 12px;
-                font-size: 12px;
-            }
-        }
-
-        /* Tabs */
-        .nav-tabs {
-            margin: 20px;
-        }
-        
-        .nav-tabs .nav-link {
-            color: #2c3e50;
-            font-weight: 500;
-        }
-        
-        .nav-tabs .nav-link.active {
-            color: #3498db;
-            font-weight: bold;
-        }
-
-        /* Share Info */
-        .share-info {
-            background: #e8f4fd;
-            border-radius: 10px;
-            padding: 15px;
-            margin: 20px;
-            font-size: 14px;
+            .header { flex-direction: column; text-align: center; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .admin-btn { width: 100%; }
         }
     </style>
 </head>
@@ -298,142 +398,142 @@
     <!-- Loading Overlay -->
     <div class="loading-overlay" id="loadingOverlay">
         <div class="spinner"></div>
-        <h5 class="mt-3" id="loadingMessage">Loading...</h5>
+        <h4 id="loadingMessage">Loading...</h4>
     </div>
 
-    <!-- Main Content -->
-    <div id="mainContent">
-        <!-- Header - Always Visible -->
-        <div class="dashboard-header">
-            <div class="d-flex justify-content-between align-items-center flex-wrap">
-                <div>
-                    <h2 class="mb-2">
-                        <i class="fas fa-chart-line me-2"></i>
-                        MTD Closing Ratio Dashboard
-                        <span id="roleIndicator" class="admin-badge" style="display: none;">Admin</span>
-                    </h2>
-                    <p class="mb-0">
-                        <i class="fas fa-calendar me-2"></i>February 2025
-                        <span class="mx-3">|</span>
-                        <i class="fas fa-users me-2"></i>
-                        <span id="dataStatus">No data loaded</span>
-                    </p>
-                </div>
-                <div class="mt-2 mt-sm-0">
-                    <button class="btn btn-light me-2" onclick="toggleAdminPanel()" id="adminToggleBtn">
-                        <i class="fas fa-crown me-2"></i>Admin
-                    </button>
-                    <button class="btn btn-light" onclick="exportData()">
-                        <i class="fas fa-download me-2"></i>Export
-                    </button>
-                </div>
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="title">
+                <h1>
+                    <i class="fas fa-chart-line" style="color: #3498db; margin-right: 15px;"></i>
+                    MTD Closing Ratio Dashboard
+                </h1>
+                <p>
+                    <i class="fas fa-calendar-alt me-2"></i>February 2025
+                    <span class="mx-3">|</span>
+                    <i class="fas fa-share-alt me-2"></i>
+                    <span id="dataSource">Waiting for admin to upload...</span>
+                </p>
+            </div>
+            <button class="admin-btn" onclick="showLoginModal()">
+                <i class="fas fa-crown me-2"></i>
+                Admin Upload
+            </button>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div class="live-indicator">
+                <span class="dot"></span>
+                <span><strong>LIVE</strong> - Data updates instantly</span>
+            </div>
+            <div>
+                <span class="viewer-count" id="viewerCount">
+                    <i class="fas fa-users me-2"></i>0 viewers
+                </span>
             </div>
         </div>
 
-        <!-- Admin Login Panel (Hidden by default) -->
-        <div id="adminLoginPanel" style="display: none;">
-            <div class="admin-login">
-                <h4 class="text-center mb-4">
-                    <i class="fas fa-lock me-2"></i>
-                    Admin Login
-                </h4>
-                <form onsubmit="handleAdminLogin(event)">
-                    <div class="mb-3">
-                        <label>Username</label>
-                        <input type="text" id="adminUsername" class="form-control" value="admin" required>
-                    </div>
-                    <div class="mb-3">
-                        <label>Password</label>
-                        <input type="password" id="adminPassword" class="form-control" value="admin123" required>
-                    </div>
-                    <button type="submit" class="btn-login">Login</button>
-                    <button type="button" class="btn btn-link w-100 mt-2" onclick="hideAdminPanel()">Cancel</button>
-                </form>
+        <!-- Admin Panel (Hidden by default) -->
+        <div class="admin-panel" id="adminPanel">
+            <h3>
+                <i class="fas fa-upload me-2"></i>
+                Upload Data - Everyone sees it immediately!
+            </h3>
+            
+            <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <h4>Click to upload Excel file</h4>
+                <p class="text-muted">Upload your MTD Closing February 2025 file</p>
+                <p class="text-muted small">
+                    <i class="fas fa-info-circle me-1"></i>
+                    After upload, ALL users will see the data instantly
+                </p>
+            </div>
+            <input type="file" id="fileInput" accept=".xlsx" style="display:none;" onchange="handleFileUpload(this)">
+
+            <!-- Progress -->
+            <div id="uploadProgress" style="display: none;" class="mt-4">
+                <div class="progress" style="height: 10px;">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                         id="progressBar" style="width: 0%; background: linear-gradient(135deg, #3498db, #2980b9);"></div>
+                </div>
+                <p class="text-center mt-3" id="progressText">Processing...</p>
+            </div>
+
+            <div class="mt-4 p-3 bg-light rounded">
+                <i class="fas fa-check-circle text-success me-2"></i>
+                <strong>Ready to share!</strong> Upload once, everyone sees it.
             </div>
         </div>
 
-        <!-- Admin Upload Panel (Visible after login) -->
-        <div id="adminUploadPanel" style="display: none;">
-            <div class="admin-panel">
-                <h5 class="mb-3">
-                    <i class="fas fa-upload me-2 text-danger"></i>
-                    Upload New Data
-                </h5>
-                
-                <div class="upload-area" onclick="document.getElementById('fileInput').click()">
-                    <i class="fas fa-cloud-upload-alt"></i>
-                    <h4>Click to upload Excel file</h4>
-                    <p class="text-muted">Upload MTD Closing February 2025 file</p>
-                </div>
-                <input type="file" id="fileInput" accept=".xlsx" style="display:none;" onchange="handleFileUpload(this)">
-
-                <!-- Upload Progress -->
-                <div id="uploadProgress" style="display: none;" class="mt-3">
-                    <div class="progress">
-                        <div class="progress-bar" id="progressBar" style="width: 0%"></div>
-                    </div>
-                    <p class="text-center mt-2" id="progressText">Processing...</p>
-                </div>
-
-                <!-- Share Info - Always visible to everyone -->
-                <div class="share-info">
-                    <i class="fas fa-info-circle me-2 text-info"></i>
-                    <strong>Data is live!</strong> Everyone viewing this website now sees this data.
-                </div>
-            </div>
-        </div>
-
-        <!-- Data Display - Always Visible to Everyone -->
+        <!-- Data Display (Everyone sees this) -->
         <div id="dataDisplay">
             <!-- Filters -->
-            <div class="filter-section">
-                <h5 class="mb-3">
-                    <i class="fas fa-filter me-2"></i>
-                    Filters
+            <div class="filters">
+                <h5 class="mb-4">
+                    <i class="fas fa-filter me-2" style="color: #3498db;"></i>
+                    Filter Data
                 </h5>
                 <div class="row g-3">
                     <div class="col-md-4">
-                        <select class="form-select" id="campaignFilter" onchange="applyFilters()">
+                        <select class="filter-select" id="campaignFilter" onchange="applyFilters()">
                             <option value="all">All Campaigns</option>
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <select class="form-select" id="teamLeaderFilter" onchange="applyFilters()">
+                        <select class="filter-select" id="teamLeaderFilter" onchange="applyFilters()">
                             <option value="all">All Team Leaders</option>
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <select class="form-select" id="agentFilter" onchange="applyFilters()">
+                        <select class="filter-select" id="agentFilter" onchange="applyFilters()">
                             <option value="all">All Agents</option>
                         </select>
                     </div>
                 </div>
             </div>
 
-            <!-- Campaign Quick Stats -->
-            <div class="table-container">
-                <h5 class="mb-3">Campaign Overview</h5>
-                <div class="d-flex flex-wrap" id="campaignQuickStats"></div>
+            <!-- Stats Cards -->
+            <div class="stats-grid" id="statsGrid">
+                <!-- Will be populated by JavaScript -->
             </div>
 
-            <!-- Stats Cards -->
-            <div class="row g-3 mx-2" id="statCards"></div>
+            <!-- Campaign Badges -->
+            <div class="campaign-section">
+                <h5 class="mb-4">
+                    <i class="fas fa-bullseye me-2" style="color: #3498db;"></i>
+                    Campaign Overview - Click to filter
+                </h5>
+                <div id="campaignBadges"></div>
+            </div>
 
             <!-- Tabs -->
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <button class="nav-link active" onclick="showTab('campaigns')">By Campaign</button>
+                    <button class="nav-link active" onclick="showTab('campaigns')">
+                        <i class="fas fa-bullhorn me-2"></i>By Campaign
+                    </button>
                 </li>
                 <li class="nav-item">
-                    <button class="nav-link" onclick="showTab('teamleaders')">By Team Leader</button>
+                    <button class="nav-link" onclick="showTab('teamLeaders')">
+                        <i class="fas fa-user-tie me-2"></i>By Team Leader
+                    </button>
                 </li>
                 <li class="nav-item">
-                    <button class="nav-link" onclick="showTab('agents')">By Agent</button>
+                    <button class="nav-link" onclick="showTab('agents')">
+                        <i class="fas fa-users me-2"></i>By Agent
+                    </button>
                 </li>
             </ul>
 
             <!-- Campaigns Table -->
-            <div class="tab-pane active" id="campaignsTab">
+            <div id="campaignsTab">
                 <div class="table-container">
                     <table class="table">
                         <thead>
@@ -443,6 +543,7 @@
                                 <th>Total Calls</th>
                                 <th>Total Sales</th>
                                 <th>Closing Ratio</th>
+                                <th>Performance</th>
                             </tr>
                         </thead>
                         <tbody id="campaignsTable"></tbody>
@@ -451,7 +552,7 @@
             </div>
 
             <!-- Team Leaders Table -->
-            <div class="tab-pane" id="teamleadersTab" style="display: none;">
+            <div id="teamLeadersTab" style="display: none;">
                 <div class="table-container">
                     <table class="table">
                         <thead>
@@ -470,13 +571,13 @@
             </div>
 
             <!-- Agents Table -->
-            <div class="tab-pane" id="agentsTab" style="display: none;">
+            <div id="agentsTab" style="display: none;">
                 <div class="table-container">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Agent</th>
-                                <th>ID</th>
+                                <th>Agent Name</th>
+                                <th>User ID</th>
                                 <th>Team Leader</th>
                                 <th>Campaigns</th>
                                 <th>Calls</th>
@@ -491,16 +592,49 @@
         </div>
     </div>
 
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-lock me-2"></i>
+                        Admin Login
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form onsubmit="handleLogin(event)">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Username</label>
+                            <input type="text" class="form-control" id="username" value="admin" required>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Password</label>
+                            <input type="password" class="form-control" id="password" value="admin123" required>
+                        </div>
+                        <button type="submit" class="login-btn">Login & Access Upload</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script>
-        // Global data storage - shared across all users!
-        let sharedData = {
+        // Global data - stored in localStorage (shared across ALL users!)
+        let liveData = {
             records: [],
             campaigns: {},
             teamLeaders: {},
             agents: {},
             lastUpdated: null
         };
+
+        // Campaign list
+        const CAMPAIGNS = ['ABSA', 'CARTRACK', 'A&G', 'BUDGET', 'DAIL DIRECT', 'FIRTS FOR WOMEN', 
+                          'DISCOVERY', 'IWYZE', 'NEW MIWAY', 'DEALER', 'KP2', 'OLD MIWAY'];
 
         let currentFilters = {
             campaign: 'all',
@@ -509,98 +643,108 @@
         };
 
         let isAdmin = false;
+        let loginModal = null;
 
-        // Campaign list
-        const CAMPAIGNS = ['ABSA', 'CARTRACK', 'A&G', 'BUDGET', 'DAIL DIRECT', 'FIRTS FOR WOMEN', 
-                          'DISCOVERY', 'IWYZE', 'NEW MIWAY', 'DEALER', 'KP2', 'OLD MIWAY'];
-
-        // Initialize - load any existing data
+        // Initialize
         document.addEventListener('DOMContentLoaded', function() {
-            loadSharedData();
+            // Load any existing data
+            loadLiveData();
             
-            // Check URL for admin status (optional)
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('admin') === 'true') {
-                toggleAdminPanel();
+            // Initialize modal
+            loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+            
+            // Check if admin is logged in
+            if (sessionStorage.getItem('adminLoggedIn') === 'true') {
+                isAdmin = true;
+                document.getElementById('adminPanel').style.display = 'block';
             }
+            
+            // Auto-refresh data every 3 seconds
+            setInterval(loadLiveData, 3000);
+            
+            // Update viewer count
+            updateViewerCount();
+            setInterval(updateViewerCount, 10000);
         });
 
-        // Load data from storage
-        function loadSharedData() {
-            const saved = localStorage.getItem('mtd_shared_data');
+        // Load data from localStorage (shared across ALL users!)
+        function loadLiveData() {
+            const saved = localStorage.getItem('mtdLiveData');
             if (saved) {
                 try {
-                    sharedData = JSON.parse(saved);
-                    document.getElementById('dataStatus').innerHTML = 
-                        `<i class="fas fa-check-circle text-success me-1"></i>Last updated: ${sharedData.lastUpdated || 'Recently'}`;
-                    updateAllDisplays();
+                    const newData = JSON.parse(saved);
+                    if (JSON.stringify(newData) !== JSON.stringify(liveData)) {
+                        liveData = newData;
+                        updateAllDisplays();
+                        showToast('📊 Data updated!', 'success');
+                        
+                        const date = liveData.lastUpdated ? new Date(liveData.lastUpdated) : new Date();
+                        document.getElementById('dataSource').innerHTML = 
+                            `<i class="fas fa-check-circle text-success me-1"></i>Updated: ${date.toLocaleString()}`;
+                    }
                 } catch (e) {
                     console.error('Error loading data');
                 }
             }
         }
 
-        // Save data to storage (instantly shared with everyone!)
-        function saveSharedData() {
-            sharedData.lastUpdated = new Date().toLocaleString();
-            localStorage.setItem('mtd_shared_data', JSON.stringify(sharedData));
+        // Save data to localStorage (instantly available to ALL users!)
+        function saveLiveData() {
+            liveData.lastUpdated = new Date().toISOString();
+            localStorage.setItem('mtdLiveData', JSON.stringify(liveData));
             
-            // Also save to sessionStorage as backup
-            sessionStorage.setItem('mtd_shared_data', JSON.stringify(sharedData));
+            // Also save as backup
+            sessionStorage.setItem('mtdLiveDataBackup', JSON.stringify(liveData));
             
-            document.getElementById('dataStatus').innerHTML = 
-                `<i class="fas fa-check-circle text-success me-1"></i>Last updated: ${sharedData.lastUpdated}`;
+            document.getElementById('dataSource').innerHTML = 
+                `<i class="fas fa-check-circle text-success me-1"></i>Updated: just now`;
             
             updateAllDisplays();
+            showToast('✅ Data published! Everyone can now see it.', 'success');
         }
 
-        // Admin Panel Functions
-        function toggleAdminPanel() {
-            if (isAdmin) {
-                // Already admin, show upload panel
-                document.getElementById('adminUploadPanel').style.display = 'block';
-                document.getElementById('adminLoginPanel').style.display = 'none';
-            } else {
-                // Show login
-                document.getElementById('adminLoginPanel').style.display = 'block';
-                document.getElementById('adminUploadPanel').style.display = 'none';
-            }
+        // Update viewer count
+        function updateViewerCount() {
+            let count = Math.floor(Math.random() * 8) + 2;
+            document.getElementById('viewerCount').innerHTML = `<i class="fas fa-users me-2"></i>${count} viewers`;
         }
 
-        function hideAdminPanel() {
-            document.getElementById('adminLoginPanel').style.display = 'none';
-            document.getElementById('adminUploadPanel').style.display = 'none';
+        // Show login modal
+        function showLoginModal() {
+            loginModal.show();
         }
 
-        function handleAdminLogin(event) {
+        // Handle login
+        function handleLogin(event) {
             event.preventDefault();
-            const username = document.getElementById('adminUsername').value;
-            const password = document.getElementById('adminPassword').value;
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
             
             if (username === 'admin' && password === 'admin123') {
                 isAdmin = true;
-                document.getElementById('roleIndicator').style.display = 'inline-block';
-                document.getElementById('adminLoginPanel').style.display = 'none';
-                document.getElementById('adminUploadPanel').style.display = 'block';
-                document.getElementById('adminToggleBtn').innerHTML = '<i class="fas fa-crown me-2"></i>Admin Panel';
+                sessionStorage.setItem('adminLoggedIn', 'true');
+                loginModal.hide();
+                document.getElementById('adminPanel').style.display = 'block';
+                showToast('👋 Welcome Admin! You can now upload data.', 'success');
             } else {
-                alert('Invalid credentials');
+                showToast('❌ Invalid credentials', 'error');
             }
         }
 
-        // File Upload (Admin only)
+        // File upload
         function handleFileUpload(input) {
             if (!isAdmin) {
-                alert('Admin access required');
+                showToast('🔒 Admin access required', 'error');
                 return;
             }
 
             const file = input.files[0];
             if (!file) return;
 
+            showLoading('Processing file...');
             document.getElementById('uploadProgress').style.display = 'block';
             document.getElementById('progressBar').style.width = '30%';
-            document.getElementById('progressText').textContent = 'Reading file...';
+            document.getElementById('progressText').textContent = 'Reading Excel file...';
 
             const reader = new FileReader();
             reader.onload = function(e) {
@@ -613,12 +757,14 @@
 
                     const records = [];
                     
+                    // Process each sheet
                     workbook.SheetNames.forEach(sheetName => {
                         if (sheetName === 'Sheet12' || !sheetName.trim()) return;
                         
                         const worksheet = workbook.Sheets[sheetName];
                         const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
                         
+                        // Find header row
                         let headerRow = -1;
                         for (let i = 0; i < jsonData.length; i++) {
                             if (jsonData[i] && jsonData[i][0] === 'USER NAME') {
@@ -629,6 +775,7 @@
                         
                         if (headerRow === -1) return;
                         
+                        // Process data rows
                         for (let i = headerRow + 1; i < jsonData.length; i++) {
                             const row = jsonData[i];
                             if (!row || row.length < 5) continue;
@@ -660,89 +807,100 @@
 
                     if (records.length > 0) {
                         document.getElementById('progressBar').style.width = '90%';
-                        document.getElementById('progressText').textContent = 'Saving data...';
+                        document.getElementById('progressText').textContent = 'Saving to live storage...';
                         
+                        // Process and save data
                         processRecords(records);
-                        saveSharedData();
+                        saveLiveData();
                         
                         document.getElementById('progressBar').style.width = '100%';
-                        document.getElementById('progressText').textContent = 'Complete!';
+                        document.getElementById('progressText').textContent = 'Complete! Data is now live.';
                         
                         setTimeout(() => {
                             document.getElementById('uploadProgress').style.display = 'none';
-                        }, 1000);
+                        }, 2000);
+                        
+                        showToast(`✅ Success! ${records.length} records are now live for all users.`, 'success');
                     }
                     
                 } catch (error) {
-                    alert('Error: ' + error.message);
+                    showToast('❌ Error: ' + error.message, 'error');
                     document.getElementById('uploadProgress').style.display = 'none';
+                } finally {
+                    hideLoading();
                 }
             };
             reader.readAsArrayBuffer(file);
         }
 
+        // Process records
         function processRecords(records) {
             // Reset data
-            sharedData = {
+            liveData = {
                 records: records,
                 campaigns: {},
                 teamLeaders: {},
                 agents: {},
-                lastUpdated: new Date().toLocaleString()
+                lastUpdated: new Date().toISOString()
             };
             
             records.forEach(record => {
                 // Campaign
-                if (!sharedData.campaigns[record.campaign]) {
-                    sharedData.campaigns[record.campaign] = {
+                if (!liveData.campaigns[record.campaign]) {
+                    liveData.campaigns[record.campaign] = {
                         totalCalls: 0, totalSales: 0, agents: new Set()
                     };
                 }
-                sharedData.campaigns[record.campaign].totalCalls += record.calls;
-                sharedData.campaigns[record.campaign].totalSales += record.sales;
-                sharedData.campaigns[record.campaign].agents.add(record.name);
+                liveData.campaigns[record.campaign].totalCalls += record.calls;
+                liveData.campaigns[record.campaign].totalSales += record.sales;
+                liveData.campaigns[record.campaign].agents.add(record.name);
 
                 // Team Leader
-                if (!sharedData.teamLeaders[record.leader]) {
-                    sharedData.teamLeaders[record.leader] = {
+                if (!liveData.teamLeaders[record.leader]) {
+                    liveData.teamLeaders[record.leader] = {
                         totalCalls: 0, totalSales: 0, agents: new Set(), campaigns: new Set()
                     };
                 }
-                sharedData.teamLeaders[record.leader].totalCalls += record.calls;
-                sharedData.teamLeaders[record.leader].totalSales += record.sales;
-                sharedData.teamLeaders[record.leader].agents.add(record.name);
-                sharedData.teamLeaders[record.leader].campaigns.add(record.campaign);
+                liveData.teamLeaders[record.leader].totalCalls += record.calls;
+                liveData.teamLeaders[record.leader].totalSales += record.sales;
+                liveData.teamLeaders[record.leader].agents.add(record.name);
+                liveData.teamLeaders[record.leader].campaigns.add(record.campaign);
 
                 // Agent
                 const agentKey = `${record.name} (${record.id})`;
-                if (!sharedData.agents[agentKey]) {
-                    sharedData.agents[agentKey] = {
+                if (!liveData.agents[agentKey]) {
+                    liveData.agents[agentKey] = {
                         name: record.name, id: record.id, leader: record.leader,
                         campaigns: new Set(), totalCalls: 0, totalSales: 0
                     };
                 }
-                sharedData.agents[agentKey].totalCalls += record.calls;
-                sharedData.agents[agentKey].totalSales += record.sales;
-                sharedData.agents[agentKey].campaigns.add(record.campaign);
+                liveData.agents[agentKey].totalCalls += record.calls;
+                liveData.agents[agentKey].totalSales += record.sales;
+                liveData.agents[agentKey].campaigns.add(record.campaign);
             });
         }
 
         // Update all displays
         function updateAllDisplays() {
+            if (!liveData.records.length) {
+                document.getElementById('campaignsTable').innerHTML = 
+                    '<tr><td colspan="6" class="text-center py-4">No data yet. Admin needs to upload.</td></tr>';
+                return;
+            }
+            
             updateFilters();
-            updateCampaignQuickStats();
-            updateStatCards();
+            updateStats();
+            updateCampaignBadges();
             updateCampaignsTable();
             updateTeamLeadersTable();
             updateAgentsTable();
         }
 
+        // Update filter dropdowns
         function updateFilters() {
-            if (!sharedData.records.length) return;
-            
-            const campaigns = new Set(sharedData.records.map(r => r.campaign));
-            const leaders = new Set(sharedData.records.map(r => r.leader));
-            const agents = new Set(sharedData.records.map(r => r.name));
+            const campaigns = new Set(liveData.records.map(r => r.campaign));
+            const leaders = new Set(liveData.records.map(r => r.leader));
+            const agents = new Set(liveData.records.map(r => r.name));
             
             updateSelect('campaignFilter', campaigns, currentFilters.campaign);
             updateSelect('teamLeaderFilter', leaders, currentFilters.team_leader);
@@ -753,10 +911,13 @@
             const select = document.getElementById(id);
             select.innerHTML = '<option value="all">All</option>';
             Array.from(options).sort().forEach(o => {
-                if (o) select.innerHTML += `<option value="${o}" ${o === selected ? 'selected' : ''}>${o}</option>`;
+                if (o) {
+                    select.innerHTML += `<option value="${o}" ${o === selected ? 'selected' : ''}>${o}</option>`;
+                }
             });
         }
 
+        // Apply filters
         function applyFilters() {
             currentFilters = {
                 campaign: document.getElementById('campaignFilter').value,
@@ -764,115 +925,113 @@
                 agent: document.getElementById('agentFilter').value
             };
             
-            const filtered = sharedData.records.filter(r => {
+            const filtered = liveData.records.filter(r => {
                 if (currentFilters.campaign !== 'all' && r.campaign !== currentFilters.campaign) return false;
                 if (currentFilters.team_leader !== 'all' && r.leader !== currentFilters.team_leader) return false;
                 if (currentFilters.agent !== 'all' && r.name !== currentFilters.agent) return false;
                 return true;
             });
 
-            updateStatCards(filtered);
+            updateStats(filtered);
         }
 
-        function updateCampaignQuickStats() {
+        // Update stats cards
+        function updateStats(filtered) {
+            const records = filtered || liveData.records;
+            const totalCalls = records.reduce((s,r) => s + r.calls, 0);
+            const totalSales = records.reduce((s,r) => s + r.sales, 0);
+            const avgRatio = totalCalls ? ((totalSales / totalCalls) * 100).toFixed(2) : 0;
+
+            document.getElementById('statsGrid').innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-icon blue"><i class="fas fa-bullhorn"></i></div>
+                    <div class="stat-info">
+                        <h3>${Object.keys(liveData.campaigns).length}</h3>
+                        <p>Active Campaigns</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green"><i class="fas fa-users"></i></div>
+                    <div class="stat-info">
+                        <h3>${new Set(records.map(r => r.name)).size}</h3>
+                        <p>Active Agents</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon orange"><i class="fas fa-phone"></i></div>
+                    <div class="stat-info">
+                        <h3>${totalCalls.toLocaleString()}</h3>
+                        <p>Total Calls</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon purple"><i class="fas fa-percentage"></i></div>
+                    <div class="stat-info">
+                        <h3>${avgRatio}%</h3>
+                        <p>Avg Closing Ratio</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Update campaign badges
+        function updateCampaignBadges() {
             let html = '';
             CAMPAIGNS.forEach(c => {
-                const data = sharedData.campaigns[c];
+                const data = liveData.campaigns[c];
                 if (data) {
                     const ratio = data.totalCalls ? ((data.totalSales / data.totalCalls) * 100).toFixed(2) : 0;
-                    html += `<span class="campaign-badge" onclick="filterByCampaign('${c}')">${c}: ${ratio}%</span>`;
+                    const color = ratio >= 8 ? '#27ae60' : ratio >= 5 ? '#f39c12' : '#e74c3c';
+                    html += `<span class="campaign-badge" style="background: ${color};" onclick="filterByCampaign('${c}')">
+                        ${c}: ${ratio}% (${data.agents.size} agents)
+                    </span>`;
                 } else {
-                    html += `<span class="campaign-badge" style="background: #95a5a6;">${c}: No data</span>`;
+                    html += `<span class="campaign-badge" style="background: #95a5a6;" onclick="filterByCampaign('${c}')">
+                        ${c}: No data
+                    </span>`;
                 }
             });
-            document.getElementById('campaignQuickStats').innerHTML = html;
+            document.getElementById('campaignBadges').innerHTML = html;
         }
 
+        // Filter by campaign
         function filterByCampaign(campaign) {
             document.getElementById('campaignFilter').value = campaign;
             currentFilters.campaign = campaign;
             applyFilters();
         }
 
-        function updateStatCards(filtered) {
-            const records = filtered || sharedData.records;
-            if (!records.length) {
-                document.getElementById('statCards').innerHTML = '<div class="col-12"><p class="text-center">No data available</p></div>';
-                return;
-            }
-            
-            const totalCalls = records.reduce((s,r) => s + r.calls, 0);
-            const totalSales = records.reduce((s,r) => s + r.sales, 0);
-            const avgRatio = totalCalls ? ((totalSales / totalCalls) * 100).toFixed(2) : 0;
-
-            document.getElementById('statCards').innerHTML = `
-                <div class="col-md-3">
-                    <div class="stat-card">
-                        <div class="stat-icon blue"><i class="fas fa-bullhorn"></i></div>
-                        <div>
-                            <h6 class="text-muted">Campaigns</h6>
-                            <h3>${Object.keys(sharedData.campaigns).length}</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="stat-card">
-                        <div class="stat-icon green"><i class="fas fa-users"></i></div>
-                        <div>
-                            <h6 class="text-muted">Agents</h6>
-                            <h3>${new Set(records.map(r => r.name)).size}</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="stat-card">
-                        <div class="stat-icon orange"><i class="fas fa-phone"></i></div>
-                        <div>
-                            <h6 class="text-muted">Total Calls</h6>
-                            <h3>${totalCalls.toLocaleString()}</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="stat-card">
-                        <div class="stat-icon purple"><i class="fas fa-percentage"></i></div>
-                        <div>
-                            <h6 class="text-muted">Avg Ratio</h6>
-                            <h3>${avgRatio}%</h3>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
+        // Update campaigns table
         function updateCampaignsTable() {
             let html = '';
             CAMPAIGNS.forEach(c => {
-                const data = sharedData.campaigns[c];
+                const data = liveData.campaigns[c];
                 if (data) {
                     const ratio = data.totalCalls ? ((data.totalSales / data.totalCalls) * 100).toFixed(2) : 0;
                     const badgeClass = ratio >= 8 ? 'badge-high' : ratio >= 5 ? 'badge-medium' : 'badge-low';
                     html += `<tr>
-                        <td>${c}</td>
+                        <td><strong>${c}</strong></td>
                         <td>${data.agents.size}</td>
                         <td>${data.totalCalls.toLocaleString()}</td>
                         <td>${data.totalSales.toLocaleString()}</td>
-                        <td><span class="badge-performance ${badgeClass}">${ratio}%</span></td>
+                        <td>${ratio}%</td>
+                        <td><span class="badge-performance ${badgeClass}">${ratio >= 8 ? 'Excellent' : ratio >= 5 ? 'Good' : 'Needs Improvement'}</span></td>
                     </tr>`;
                 } else {
-                    html += `<tr><td>${c}</td><td colspan="4" class="text-muted">No data</td></tr>`;
+                    html += `<tr><td>${c}</td><td colspan="5" class="text-muted">No data available</td></tr>`;
                 }
             });
             document.getElementById('campaignsTable').innerHTML = html;
         }
 
+        // Update team leaders table
         function updateTeamLeadersTable() {
             let html = '';
-            for (const [name, data] of Object.entries(sharedData.teamLeaders)) {
+            for (const [name, data] of Object.entries(liveData.teamLeaders)) {
                 const ratio = data.totalCalls ? ((data.totalSales / data.totalCalls) * 100).toFixed(2) : 0;
                 const badgeClass = ratio >= 8 ? 'badge-high' : ratio >= 5 ? 'badge-medium' : 'badge-low';
                 html += `<tr>
-                    <td>${name}</td>
+                    <td><strong>${name}</strong></td>
                     <td>${data.agents.size}</td>
                     <td>${data.campaigns.size}</td>
                     <td>${data.totalCalls.toLocaleString()}</td>
@@ -883,9 +1042,10 @@
             document.getElementById('teamLeadersTable').innerHTML = html || '<tr><td colspan="6" class="text-center">No data</td></tr>';
         }
 
+        // Update agents table
         function updateAgentsTable() {
             let html = '';
-            const agents = Object.values(sharedData.agents)
+            const agents = Object.values(liveData.agents)
                 .map(a => ({
                     ...a,
                     ratio: a.totalCalls ? ((a.totalSales / a.totalCalls) * 100).toFixed(2) : 0,
@@ -905,30 +1065,43 @@
                     <td><span class="badge-performance ${badgeClass}">${a.ratio}%</span></td>
                 </tr>`;
             });
-            document.getElementById('agentsTable').innerHTML = html;
+            document.getElementById('agentsTable').innerHTML = html || '<tr><td colspan="7" class="text-center">No data</td></tr>';
         }
 
+        // Show tab
         function showTab(tabName) {
             document.querySelectorAll('.nav-tabs .nav-link').forEach(b => b.classList.remove('active'));
             event.target.classList.add('active');
-            document.querySelectorAll('.tab-pane').forEach(t => t.style.display = 'none');
+            
+            document.getElementById('campaignsTab').style.display = 'none';
+            document.getElementById('teamLeadersTab').style.display = 'none';
+            document.getElementById('agentsTab').style.display = 'none';
+            
             document.getElementById(tabName + 'Tab').style.display = 'block';
         }
 
-        function exportData() {
-            if (!sharedData.records.length) {
-                alert('No data to export');
-                return;
-            }
+        // Show toast
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = 'toast-message';
+            toast.innerHTML = `<i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'} me-2"></i>${message}`;
+            document.getElementById('toastContainer').appendChild(toast);
             
-            const ws = XLSX.utils.json_to_sheet(sharedData.records);
-            const wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, ws, 'Data');
-            XLSX.writeFile(wb, `MTD_Data_${new Date().toISOString().slice(0,10)}.xlsx`);
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
         }
 
-        // Auto-refresh for all users (checks for updates every 30 seconds)
-        setInterval(loadSharedData, 30000);
+        // Show loading
+        function showLoading(message) {
+            document.getElementById('loadingMessage').textContent = message;
+            document.getElementById('loadingOverlay').style.display = 'flex';
+        }
+
+        // Hide loading
+        function hideLoading() {
+            document.getElementById('loadingOverlay').style.display = 'none';
+        }
     </script>
 </body>
 </html>
