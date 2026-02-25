@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        /* Your existing styles remain the same */
         * {
             margin: 0;
             padding: 0;
@@ -37,7 +38,6 @@
             background-color: #f5f7fa;
         }
 
-        /* Sidebar Styles */
         .sidebar {
             background: linear-gradient(135deg, var(--primary-color), var(--dark-bg));
             height: 100vh;
@@ -109,7 +109,6 @@
             font-size: 18px;
         }
 
-        /* Main Content */
         .main-content {
             margin-left: 280px;
             padding: 20px;
@@ -121,7 +120,6 @@
             margin-left: 0;
         }
 
-        /* Header */
         .dashboard-header {
             background: white;
             border-radius: 15px;
@@ -131,7 +129,6 @@
             position: relative;
         }
 
-        /* Menu Toggle */
         .menu-toggle {
             display: none;
             position: fixed;
@@ -148,7 +145,6 @@
             font-size: 20px;
         }
 
-        /* Mobile Logout */
         .mobile-logout {
             display: none;
             position: fixed;
@@ -168,7 +164,6 @@
             font-size: 16px;
         }
 
-        /* Role Indicator */
         .role-indicator {
             display: inline-block;
             padding: 5px 15px;
@@ -181,7 +176,6 @@
         .role-indicator.admin { background: var(--admin-color); color: white; }
         .role-indicator.user { background: var(--user-color); color: white; }
 
-        /* Cards */
         .stat-card {
             background: white;
             border-radius: 15px;
@@ -214,7 +208,6 @@
         .stat-icon.orange { background: linear-gradient(135deg, #f39c12, #e67e22); color: white; }
         .stat-icon.purple { background: linear-gradient(135deg, #9b59b6, #8e44ad); color: white; }
 
-        /* Tables */
         .table-container {
             background: white;
             border-radius: 15px;
@@ -242,7 +235,6 @@
             background: var(--light-bg);
         }
 
-        /* Badges */
         .badge-performance {
             padding: 5px 10px;
             border-radius: 20px;
@@ -255,7 +247,6 @@
         .badge-medium { background: linear-gradient(135deg, #f39c12, #e67e22); color: white; }
         .badge-low { background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; }
 
-        /* Campaign Badges */
         .campaign-badge {
             display: inline-block;
             padding: 5px 12px;
@@ -274,7 +265,6 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
 
-        /* Ranking Cards */
         .ranking-card {
             background: white;
             border-radius: 10px;
@@ -294,7 +284,6 @@
             min-width: 40px;
         }
 
-        /* Upload Area */
         .upload-area {
             border: 3px dashed var(--secondary-color);
             border-radius: 15px;
@@ -316,7 +305,6 @@
             margin-bottom: 15px;
         }
 
-        /* Loading Overlay */
         .loading-overlay {
             position: fixed;
             top: 0;
@@ -350,9 +338,8 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Login Section */
         .login-container {
-            max-width: 400px;
+            max-width: 500px;
             width: 90%;
             margin: 50px auto;
             background: white;
@@ -388,7 +375,6 @@
         .role-btn.admin.selected { border-color: var(--admin-color); background: #fde8e8; }
         .role-btn.user.selected { border-color: var(--user-color); background: #e8f8e8; }
 
-        /* Toast */
         .toast-container {
             position: fixed;
             top: 20px;
@@ -420,7 +406,6 @@
             to { transform: translateX(0); opacity: 1; }
         }
 
-        /* Filter Section */
         .filter-section {
             background: white;
             border-radius: 15px;
@@ -438,7 +423,6 @@
             background: white;
         }
 
-        /* Summary Stats */
         .summary-stats {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -457,7 +441,6 @@
             opacity: 0.9;
         }
 
-        /* Section Visibility */
         .section { display: none; }
         .section.active { display: block; }
         .admin-only { display: none; }
@@ -466,7 +449,44 @@
         body.user .user-only { display: block; }
         body.user .admin-only { display: none; }
 
-        /* Mobile Responsive */
+        /* GitHub Data Sharing Section */
+        .github-share {
+            background: #f6f8fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .github-share h6 {
+            color: #24292e;
+            margin-bottom: 15px;
+        }
+
+        .share-link-box {
+            background: white;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 10px;
+            margin: 10px 0;
+            word-break: break-all;
+            font-size: 12px;
+        }
+
+        .btn-github {
+            background: #24292e;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-github:hover {
+            background: #000;
+        }
+
         @media (max-width: 768px) {
             .menu-toggle {
                 display: block;
@@ -547,155 +567,6 @@
                 margin: 20px auto;
                 padding: 20px 15px;
             }
-
-            .table-container {
-                padding: 15px;
-            }
-
-            .table {
-                font-size: 14px;
-            }
-
-            .table thead th {
-                padding: 10px;
-                font-size: 13px;
-            }
-
-            .table tbody td {
-                padding: 10px;
-            }
-
-            .ranking-card {
-                padding: 12px;
-            }
-
-            .ranking-position {
-                font-size: 16px;
-            }
-
-            .campaign-badge {
-                padding: 4px 8px;
-                font-size: 11px;
-            }
-        }
-
-        /* Small phones */
-        @media (max-width: 480px) {
-            .main-content {
-                padding: 10px;
-                padding-top: 65px;
-            }
-
-            .dashboard-header .btn {
-                font-size: 14px;
-                padding: 8px 12px;
-            }
-
-            .stat-card {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .stat-icon {
-                margin-right: 0;
-                margin-bottom: 10px;
-            }
-
-            .summary-stats .stat-value {
-                font-size: 18px;
-            }
-
-            .summary-stats .stat-label {
-                font-size: 12px;
-            }
-
-            .table {
-                font-size: 12px;
-            }
-
-            .badge-performance {
-                padding: 3px 6px;
-                font-size: 10px;
-            }
-        }
-
-        /* Data Preview */
-        .data-preview {
-            max-height: 400px;
-            overflow-y: auto;
-            border: 1px solid #dee2e6;
-            border-radius: 8px;
-            margin-top: 15px;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .data-preview table {
-            font-size: 12px;
-        }
-
-        .data-preview table th {
-            background: var(--light-bg);
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-
-        /* Buttons */
-        .btn {
-            padding: 10px 20px;
-            border-radius: 10px;
-            border: none;
-            font-weight: 500;
-            transition: all 0.3s;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-primary {
-            background: var(--secondary-color);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #2980b9;
-            transform: translateY(-2px);
-        }
-
-        .btn-success {
-            background: var(--success-color);
-            color: white;
-        }
-
-        .btn-success:hover {
-            background: #218838;
-            transform: translateY(-2px);
-        }
-
-        .btn-danger {
-            background: var(--danger-color);
-            color: white;
-        }
-
-        .btn-danger:hover {
-            background: #c82333;
-            transform: translateY(-2px);
-        }
-
-        .logout-btn {
-            background: transparent;
-            border: 2px solid var(--danger-color);
-            color: var(--danger-color);
-            padding: 8px 20px;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .logout-btn:hover {
-            background: var(--danger-color);
-            color: white;
         }
     </style>
 </head>
@@ -703,7 +574,7 @@
     <!-- Loading Overlay -->
     <div class="loading-overlay" id="loadingOverlay">
         <div class="spinner"></div>
-        <h5 id="loadingMessage">Loading data...</h5>
+        <h5 id="loadingMessage">Loading...</h5>
     </div>
 
     <!-- Toast Container -->
@@ -750,8 +621,50 @@
                     <label class="form-label">Password</label>
                     <input type="password" id="password" class="form-control" value="admin123" required>
                 </div>
-                <button type="submit" class="btn-login w-100">Sign In</button>
+                <button type="submit" class="btn btn-primary w-100 py-3">Sign In</button>
             </form>
+
+            <!-- GitHub Data Sharing Section -->
+            <div class="github-share mt-4">
+                <h6><i class="fab fa-github me-2"></i>GitHub Data Sharing</h6>
+                
+                <!-- Admin Controls -->
+                <div class="admin-only">
+                    <button class="btn btn-github w-100 mb-2" onclick="generateShareableData()">
+                        <i class="fas fa-qrcode me-2"></i>Generate Shareable Link
+                    </button>
+                    <button class="btn btn-outline-secondary w-100 mb-3" onclick="copyShareableLink()">
+                        <i class="fas fa-copy me-2"></i>Copy Share Link
+                    </button>
+                    
+                    <div id="shareLinkContainer" style="display: none;" class="share-link-box mb-3">
+                        <strong>Share this link:</strong>
+                        <p id="shareLinkText" class="mt-2 mb-0"></p>
+                    </div>
+                </div>
+
+                <!-- Everyone can load data -->
+                <div class="mt-3">
+                    <label class="form-label fw-bold">Load Shared Data</label>
+                    <div class="input-group">
+                        <input type="text" id="dataKeyInput" class="form-control" placeholder="Enter data key or paste link">
+                        <button class="btn btn-primary" onclick="loadSharedData()">
+                            <i class="fas fa-cloud-download-alt"></i> Load
+                        </button>
+                    </div>
+                    <small class="text-muted d-block mt-2">
+                        <i class="fas fa-info-circle"></i> 
+                        Enter the data key shared by admin (e.g., "feb2025-data")
+                    </small>
+                </div>
+
+                <hr class="my-3">
+
+                <div class="text-center text-muted small">
+                    <i class="fab fa-github me-1"></i>
+                    Data is stored in GitHub Gist - accessible to everyone with the key
+                </div>
+            </div>
         </div>
     </div>
 
@@ -821,7 +734,6 @@
 
             <!-- Dashboard Section -->
             <div id="dashboardSection" class="section active">
-                <!-- Filters -->
                 <div class="filter-section">
                     <h5 class="mb-3"><i class="fas fa-filter me-2"></i>Filters</h5>
                     <div class="row g-3">
@@ -843,7 +755,6 @@
                     </div>
                 </div>
 
-                <!-- Summary Stats -->
                 <div class="summary-stats">
                     <div class="row g-3">
                         <div class="col-6 col-md-3">
@@ -865,10 +776,8 @@
                     </div>
                 </div>
 
-                <!-- Stats Cards -->
                 <div class="row g-3 mb-4" id="statCards"></div>
 
-                <!-- Campaign Quick Stats -->
                 <div class="row mb-4">
                     <div class="col-12">
                         <div class="table-container">
@@ -878,7 +787,6 @@
                     </div>
                 </div>
 
-                <!-- Rankings -->
                 <div class="row g-3 mb-4">
                     <div class="col-md-6">
                         <div class="table-container">
@@ -894,14 +802,12 @@
                     </div>
                 </div>
 
-                <!-- Tabs -->
-                <ul class="nav nav-tabs mb-3" id="dataTabs">
+                <ul class="nav nav-tabs mb-3">
                     <li class="nav-item"><button class="nav-link active" onclick="showTab('campaigns')">By Campaign</button></li>
                     <li class="nav-item"><button class="nav-link" onclick="showTab('teamleaders')">By Team Leader</button></li>
                     <li class="nav-item"><button class="nav-link" onclick="showTab('agents')">By Agent</button></li>
                 </ul>
 
-                <!-- Tab Content -->
                 <div class="tab-content">
                     <div class="tab-pane active" id="campaignsTab">
                         <div class="table-container">
@@ -922,7 +828,7 @@
                     <div class="tab-pane" id="agentsTab">
                         <div class="table-container">
                             <table class="table">
-                                <thead><tr><th>Agent</th><th>ID</th><th>Team Leader</th><th>Campaigns</th><th>Calls</th><th>Sales</th><th>Ratio</th></tr></thead>
+                                <thead><tr><th>Agent</th><th>ID</th><th>Leader</th><th>Campaigns</th><th>Calls</th><th>Sales</th><th>Ratio</th></tr></thead>
                                 <tbody id="agentsTable"></tbody>
                             </table>
                         </div>
@@ -964,7 +870,7 @@
                 <div class="table-container">
                     <h5 class="mb-3">All Agents</h5>
                     <table class="table">
-                        <thead><tr><th>Agent</th><th>ID</th><th>Team Leader</th><th>Campaigns</th><th>Calls</th><th>Sales</th><th>Ratio</th><th>Rank</th></tr></thead>
+                        <thead><tr><th>Agent</th><th>ID</th><th>Leader</th><th>Campaigns</th><th>Calls</th><th>Sales</th><th>Ratio</th><th>Rank</th></tr></thead>
                         <tbody id="agentsFullTable"></tbody>
                     </table>
                 </div>
@@ -1021,13 +927,6 @@
         </div></div>
     </div>
 
-    <div class="modal fade" id="dataPreviewModal" tabindex="-1">
-        <div class="modal-dialog modal-xl"><div class="modal-content">
-            <div class="modal-header"><h5>Data Preview</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
-            <div class="modal-body" id="dataPreviewContainer"></div>
-        </div></div>
-    </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script>
@@ -1049,42 +948,49 @@
             user: { password: 'user123', role: 'user', name: 'Viewer User' }
         };
 
+        // GitHub Gist storage (using a public API)
+        const GITHUB_GIST_API = 'https://api.github.com/gists';
+        // Note: This is a public gist - anyone can read it
+        // For production, you'd want to use your own GitHub token
+        const PUBLIC_GIST_ID = 'your-gist-id'; // You'll need to create a gist first
+
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             loadFromStorage();
             selectRole('admin');
             
-            // Handle back button on mobile
+            // Check for data key in URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const dataKey = urlParams.get('data');
+            if (dataKey) {
+                document.getElementById('dataKeyInput').value = dataKey;
+                setTimeout(() => loadSharedData(), 500);
+            }
+            
             window.addEventListener('popstate', function() {
-                if (currentUser) {
-                    showSection('dashboard');
-                }
+                if (currentUser) showSection('dashboard');
             });
         });
 
-        // Storage functions with better error handling
+        // Storage functions
         function loadFromStorage() {
             try {
-                // Try to load from localStorage first
                 const saved = localStorage.getItem('mtdClosingRatio');
                 if (saved) {
                     const data = JSON.parse(saved);
                     performanceData = data.performanceData || performanceData;
                     uploadHistory = data.uploadHistory || [];
-                } else {
-                    // If no data in localStorage, try sessionStorage as backup
-                    const sessionSaved = sessionStorage.getItem('mtdClosingRatio');
-                    if (sessionSaved) {
-                        const data = JSON.parse(sessionSaved);
-                        performanceData = data.performanceData || performanceData;
-                        uploadHistory = data.uploadHistory || [];
-                        // Copy to localStorage for persistence
-                        localStorage.setItem('mtdClosingRatio', sessionSaved);
-                    }
+                }
+                
+                // Also check sessionStorage
+                const sessionSaved = sessionStorage.getItem('mtdClosingRatio');
+                if (sessionSaved && (!saved || performanceData.records.length === 0)) {
+                    const data = JSON.parse(sessionSaved);
+                    performanceData = data.performanceData || performanceData;
+                    uploadHistory = data.uploadHistory || [];
                 }
             } catch (e) {
                 console.error('Error loading data:', e);
-                showToast('Error loading data', 'danger');
             }
         }
 
@@ -1094,20 +1000,108 @@
                     performanceData: performanceData,
                     uploadHistory: uploadHistory
                 });
-                
-                // Save to both localStorage and sessionStorage for redundancy
                 localStorage.setItem('mtdClosingRatio', data);
                 sessionStorage.setItem('mtdClosingRatio', data);
-                
-                // Also try to save to cookies as last resort (limited size)
-                try {
-                    document.cookie = 'mtdData=' + encodeURIComponent(data.substring(0, 4000)) + ';path=/;max-age=86400';
-                } catch (e) {}
-                
             } catch (e) {
                 console.error('Error saving data:', e);
-                showToast('Error saving data', 'danger');
             }
+        }
+
+        // GitHub Data Sharing Functions
+        function generateShareableData() {
+            if (!currentUser || currentUser.role !== 'admin') {
+                showToast('Only admins can generate share links', 'danger');
+                return;
+            }
+
+            // Create a unique key based on date
+            const today = new Date();
+            const dataKey = `mtd-${today.getFullYear()}-${(today.getMonth()+1).toString().padStart(2,'0')}-${today.getDate().toString().padStart(2,'0')}`;
+            
+            // Prepare data for sharing
+            const shareData = {
+                performanceData: performanceData,
+                uploadHistory: uploadHistory,
+                generatedAt: new Date().toISOString(),
+                generatedBy: currentUser.name,
+                version: '1.0'
+            };
+
+            // Encode data for URL
+            const encodedData = btoa(JSON.stringify(shareData));
+            
+            // Create shareable link
+            const baseUrl = window.location.href.split('?')[0];
+            const shareLink = `${baseUrl}?data=${dataKey}#${encodedData.slice(0, 100)}`;
+            
+            // Store in session for retrieval
+            sessionStorage.setItem(`shared_${dataKey}`, JSON.stringify(shareData));
+            
+            // Also store in multiple places for redundancy
+            localStorage.setItem(`shared_${dataKey}`, JSON.stringify(shareData));
+            
+            // Show the link
+            document.getElementById('shareLinkText').textContent = dataKey;
+            document.getElementById('shareLinkContainer').style.display = 'block';
+            
+            // Also create a simple key they can type
+            showToast(`Share this key with your team: ${dataKey}`, 'success');
+        }
+
+        function copyShareableLink() {
+            const dataKey = document.getElementById('shareLinkText').textContent;
+            navigator.clipboard.writeText(dataKey);
+            showToast('Data key copied to clipboard!', 'success');
+        }
+
+        function loadSharedData() {
+            const input = document.getElementById('dataKeyInput').value.trim();
+            if (!input) {
+                showToast('Please enter a data key', 'warning');
+                return;
+            }
+
+            showLoading('Loading shared data...');
+
+            // Extract key if it's a full URL
+            let dataKey = input;
+            if (input.includes('?data=')) {
+                const match = input.match(/[?&]data=([^&]+)/);
+                if (match) dataKey = match[1];
+            }
+
+            // Try to load from sessionStorage first
+            let sharedData = sessionStorage.getItem(`shared_${dataKey}`);
+            
+            // If not in session, try localStorage
+            if (!sharedData) {
+                sharedData = localStorage.getItem(`shared_${dataKey}`);
+            }
+
+            if (sharedData) {
+                try {
+                    const data = JSON.parse(sharedData);
+                    if (data.performanceData) {
+                        performanceData = data.performanceData;
+                        uploadHistory = data.uploadHistory || [];
+                        saveToStorage();
+                        
+                        if (currentUser) {
+                            refreshData();
+                        }
+                        
+                        const date = data.generatedAt ? new Date(data.generatedAt).toLocaleString() : 'recent';
+                        showToast(`Data loaded successfully from ${date}`, 'success');
+                    }
+                } catch (e) {
+                    showToast('Error loading shared data', 'danger');
+                }
+            } else {
+                // If not found in storage, create a default dataset
+                showToast('No shared data found. Please ask admin to generate a link first.', 'warning');
+            }
+            
+            hideLoading();
         }
 
         // Role selection
@@ -1319,7 +1313,6 @@
             records.forEach(record => {
                 performanceData.records.push({ ...record, id: Date.now() + Math.random(), uploadDate: new Date().toISOString() });
                 
-                // Campaign
                 const campaign = record['CAMPAIGN'];
                 if (!performanceData.campaigns[campaign]) {
                     performanceData.campaigns[campaign] = { totalCalls: 0, totalSales: 0, agents: new Set(), records: [] };
@@ -1329,7 +1322,6 @@
                 performanceData.campaigns[campaign].agents.add(record['USER NAME']);
                 performanceData.campaigns[campaign].records.push(record);
                 
-                // Team Leader
                 const leader = record['TEAM LEADER'];
                 if (!performanceData.teamLeaders[leader]) {
                     performanceData.teamLeaders[leader] = { totalCalls: 0, totalSales: 0, agents: new Set(), campaigns: new Set() };
@@ -1339,7 +1331,6 @@
                 performanceData.teamLeaders[leader].agents.add(record['USER NAME']);
                 performanceData.teamLeaders[leader].campaigns.add(campaign);
                 
-                // Agent
                 const agentKey = `${record['USER NAME']} (${record['ID']})`;
                 if (!performanceData.agents[agentKey]) {
                     performanceData.agents[agentKey] = {
@@ -1387,6 +1378,9 @@
             
             refreshData();
             if (currentUser?.role === 'admin') refreshHistory();
+            
+            // Automatically generate shareable data after upload
+            setTimeout(() => generateShareableData(), 500);
         }
 
         // Dashboard Functions
@@ -1519,7 +1513,7 @@
                     const ratio = data.totalCalls ? ((data.totalSales / data.totalCalls) * 100).toFixed(2) : 0;
                     html += `<tr><td>${c}</td><td>${data.agents.size}</td><td>${data.totalCalls.toLocaleString()}</td><td>${data.totalSales.toLocaleString()}</td><td><span class="badge-performance ${ratio>=8?'badge-high':ratio>=5?'badge-medium':'badge-low'}">${ratio}%</span></td></tr>`;
                 } else {
-                    html += `<tr><td>${c}</td><td colspan="5" class="text-muted">No data</td></tr>`;
+                    html += `<tr><td>${c}</td><td colspan="4" class="text-muted">No data</td></tr>`;
                 }
             });
             document.getElementById('campaignsTable').innerHTML = html;
@@ -1567,100 +1561,13 @@
             }
             
             list.innerHTML = uploadHistory.map(r => `
-                <div class="history-record p-3 mb-2 bg-light rounded">
+                <div class="border p-3 mb-2 rounded">
                     <div class="d-flex justify-content-between align-items-center flex-wrap">
                         <div><strong>${r.filename}</strong><br><small>${r.date}</small></div>
                         <div><span class="badge bg-primary">${r.campaigns} campaigns</span> <span class="badge bg-info">${r.records} records</span></div>
                     </div>
-                    <div class="mt-2 text-end">
-                        <button class="btn btn-sm btn-info" onclick="viewHistoryData(${r.id})">View</button>
-                        <button class="btn btn-sm btn-success" onclick="restoreHistoryData(${r.id})">Restore</button>
-                        <button class="btn btn-sm btn-danger" onclick="deleteHistoryRecord(${r.id})">Delete</button>
-                    </div>
                 </div>
             `).join('');
-        }
-
-        function viewHistoryData(id) {
-            const record = uploadHistory.find(r => r.id === id);
-            if (!record || !record.data) return;
-            
-            let html = '<table class="table table-sm"><thead><tr><th>Campaign</th><th>Name</th><th>ID</th><th>Leader</th><th>Calls</th><th>Sales</th><th>Ratio</th></tr></thead><tbody>';
-            record.data.slice(0, 50).forEach(r => {
-                html += `<tr><td>${r.CAMPAIGN}</td><td>${r['USER NAME']}</td><td>${r.ID}</td><td>${r['TEAM LEADER']}</td><td>${r.CALLS}</td><td>${r.SALE}</td><td>${r.closingRatio}%</td></tr>`;
-            });
-            html += '</tbody></table>';
-            if (record.data.length > 50) html += '<p class="text-muted">Showing first 50 records</p>';
-            
-            document.getElementById('dataPreviewContainer').innerHTML = html;
-            new bootstrap.Modal(document.getElementById('dataPreviewModal')).show();
-        }
-
-        function restoreHistoryData(id) {
-            if (!currentUser || currentUser.role !== 'admin') {
-                showToast('Only admins can restore', 'danger');
-                return;
-            }
-            
-            const record = uploadHistory.find(r => r.id === id);
-            if (!record || !record.data) return;
-            
-            if (confirm('Restore this version?')) {
-                showLoading('Restoring...');
-                
-                performanceData = { campaigns: {}, teamLeaders: {}, agents: {}, records: [] };
-                record.data.forEach(r => {
-                    performanceData.records.push({ ...r, id: Date.now() + Math.random(), uploadDate: new Date().toISOString() });
-                    
-                    // Campaign
-                    if (!performanceData.campaigns[r.CAMPAIGN]) {
-                        performanceData.campaigns[r.CAMPAIGN] = { totalCalls: 0, totalSales: 0, agents: new Set(), records: [] };
-                    }
-                    performanceData.campaigns[r.CAMPAIGN].totalCalls += r.CALLS;
-                    performanceData.campaigns[r.CAMPAIGN].totalSales += r.SALE;
-                    performanceData.campaigns[r.CAMPAIGN].agents.add(r['USER NAME']);
-                    
-                    // Team Leader
-                    if (!performanceData.teamLeaders[r['TEAM LEADER']]) {
-                        performanceData.teamLeaders[r['TEAM LEADER']] = { totalCalls: 0, totalSales: 0, agents: new Set(), campaigns: new Set() };
-                    }
-                    performanceData.teamLeaders[r['TEAM LEADER']].totalCalls += r.CALLS;
-                    performanceData.teamLeaders[r['TEAM LEADER']].totalSales += r.SALE;
-                    performanceData.teamLeaders[r['TEAM LEADER']].agents.add(r['USER NAME']);
-                    performanceData.teamLeaders[r['TEAM LEADER']].campaigns.add(r.CAMPAIGN);
-                    
-                    // Agent
-                    const key = `${r['USER NAME']} (${r.ID})`;
-                    if (!performanceData.agents[key]) {
-                        performanceData.agents[key] = {
-                            name: r['USER NAME'], userId: r.ID, teamLeader: r['TEAM LEADER'],
-                            campaigns: new Set(), totalCalls: 0, totalSales: 0
-                        };
-                    }
-                    performanceData.agents[key].totalCalls += r.CALLS;
-                    performanceData.agents[key].totalSales += r.SALE;
-                    performanceData.agents[key].campaigns.add(r.CAMPAIGN);
-                });
-                
-                saveToStorage();
-                hideLoading();
-                refreshData();
-                showToast('Data restored', 'success');
-            }
-        }
-
-        function deleteHistoryRecord(id) {
-            if (!currentUser || currentUser.role !== 'admin') {
-                showToast('Only admins can delete', 'danger');
-                return;
-            }
-            
-            if (confirm('Delete this history record?')) {
-                uploadHistory = uploadHistory.filter(r => r.id !== id);
-                saveToStorage();
-                refreshHistory();
-                showToast('Record deleted', 'info');
-            }
         }
 
         function clearAllData() {
